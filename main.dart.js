@@ -20962,7 +20962,7 @@ A.a9Q.prototype={
 $1(a){var s=A.d8().b
 if(s==null)s=null
 else{s=s.canvasKitBaseUrl
-if(s==null)s=null}return(s==null?"https://www.gstatic.com/flutter-canvaskit/36335019a8eab588c3c2ea783c618d90505be233/":s)+a},
+if(s==null)s=null}return(s==null?"https://www.gstatic.com/flutter-canvaskit/a18df97ca57a249df5d8d68cd0820600223ce262/":s)+a},
 $S:114}
 A.Q_.prototype={
 cB(a){B.c.a_(this.a.a.save())},
@@ -63394,7 +63394,7 @@ $2(a,b){var s=this,r=null,q=s.b,p=s.c,o=p?200:260,n=p?10:20,m=p?30:40,l=A.ld(48)
 return A.agp(!1,!0,A.jI(r,A.im(A.ha(s.d,A.kw(r,r,B.i,r,r,r,r,r,r,r,r,p?14:18,r,r,B.aM,r,r,!0,r,r,r,r,r,r,r,r),r),r,r),B.x,r,r,new A.dq(r,r,k,l,r,r,B.aW),r,r,r,new A.b0(m,n,m,n),r,r,o),r,!0,r,r,r,r,r,r,r,r,r,new A.a65(s.a,q,b),r,r,r,r)},
 $S:411}
 A.a65.prototype={
-$0(){if(this.b==="/professional")this.a.iU("https://play.google.com/store/apps/developer?id=Vasov")
+$0(){if(this.b==="/professional")this.a.iU("https://play.google.com/store/apps/developer?id=Stefan+Vasov")
 else this.c.$0()},
 $S:0}
 A.oG.prototype={
