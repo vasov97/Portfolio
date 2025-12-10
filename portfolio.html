@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter & FlutterFlow Developer Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Dev Portfolio</div>
+            <div class="nav-links">
+                <a href="#hero">Home</a>
+                <a href="#projects">Projects</a>
+                <a href="#tech">Tech Stack</a>
+                <a href="#flutterflow">FlutterFlow</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Need an MVP or Full App Built?</h1>
+                <p class="hero-subtitle">I build production-ready mobile apps with Flutter & FlutterFlow</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">$15</span>
+                        <span class="stat-label">Hourly Rate</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Fast</span>
+                        <span class="stat-label">Delivery</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Quality</span>
+                    </div>
+                </div>
+                <a href="#contact" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="scroll-hint">← Drag or scroll to see all projects →</div>
+            <div class="projects-scroll-container">
+                <div class="projects-scroll">
+                       <div class="project-card">
+                        <div class="project-image">
+                            <img src="perf.png" alt="Scent Finder">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <img src="perfume_icon.png" alt="App Icon" class="app-icon">
+                                <h3>Scent Finder</h3>
+                            </div>
+                            <p>Discover your signature scent effortlessly. Take a quick scent quiz, explore fragrance notes you love, and get personalized perfume recommendations that match your vibe.</p>
+                            <div class="project-tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">Firebase</span>
+                                <span class="tag">OpenAI</span>
+                                <span class="tag">Sqflite</span>
+                            </div>
+                            <a href="https://play.google.com/store/apps/details?id=com.perfume_assist.app2" target="_blank" class="playstore-link">
+                                <img src="playstore.png" alt="Get it on Google Play">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="fit.png" alt="Simple Workout Tracker">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <img src="icon.png" alt="App Icon" class="app-icon">
+                                <h3>FitProgress</h3>
+                            </div>
+                            <p>Track your fitness progress with ease. Log workouts, monitor stats, and achieve your goals.</p>
+                            <div class="project-tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">Sqflite</span>
+                                
+                            </div>
+                            <a href="https://play.google.com/store/apps/details?id=com.fitprogress.tracker" target="_blank" class="playstore-link">
+                                <img src="playstore.png" alt="Get it on Google Play">
+                            </a>
+                        </div>
+                    </div>
+                    
+
+                     <div class="project-card">
+                        <div class="project-image">
+                            <img src="coversolar.png" alt="Simple Workout Tracker">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <img src="solar.png" alt="App Icon" class="app-icon">
+                                <h3>Solar Route</h3>
+                            </div>
+                            <p>Route finding app for electric vehicles that calculates and displays optimal driving routes based on solar exposure.</p>
+                            <div class="project-tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">Mapbox</span>
+                                <span class="tag">OpenMeteo</span>
+                                <span class="tag">SharedPrefs</span>
+                                
+                            </div>
+                            <a href="https://play.google.com/store/apps/details?id=com.fitprogress.tracker" target="_blank" class="playstore-link">
+                                <img src="playstore.png" alt="Get it on Google Play">
+                            </a>
+                        </div>
+                    </div>
+
+
+                    
+
+                     <div class="project-card">
+                        <div class="project-image">
+                            <img src="toxic.png" alt="Stay Toxic: Guide to Drama">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <img src="playstore-icon.png" alt="App Icon" class="app-icon">
+                                <h3>Stay Toxic: Guide to Drama</h3>
+                            </div>
+                            <p>Find out how toxic can you be with toxic quiz, horoscope and quotes.</p>
+                            <div class="project-tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">Shared Preferences</span>
+                                
+                            </div>
+                            <a href="https://play.google.com/store/apps/details?id=com.staytoxic.app2" target="_blank" class="playstore-link">
+                                <img src="playstore.png" alt="Get it on Google Play">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&h=250&fit=crop" alt="Tea Cash">
+                        </div>
+                        <div class="project-content">
+                            <h3>Tea Cash</h3>
+                            <p>Simple yet powerful expense tracker that makes managing daily finances effortless with beautiful visualizations.</p>
+                            <div class="project-tags">
+                                <span class="tag">FlutterFlow</span>
+                                <span class="tag">Firebase</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+  <section id="tech" class="tech-stack">
+  <div class="container">
+    <h2 class="section-title">Tech Stack</h2>
+
+    <div class="tech-grid">
+      <div class="tech-item">
+        <div class="tech-icon">
+          <img src="flutter.png" alt="Flutter" width="64" height="64" loading="lazy" />
+        </div>
+        <h4>Flutter</h4>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-icon">
+          <img src="ff.png" alt="FlutterFlow" width="64" height="64" loading="lazy" />
+        </div>
+        <h4>FlutterFlow</h4>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-icon">
+          <img src="fir.png" alt="Firebase" width="64" height="64" loading="lazy" />
+        </div>
+        <h4>Firebase</h4>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-icon">
+          <img src="supabase.png" alt="Supabase" width="64" height="64" loading="lazy" />
+        </div>
+        <h4>Supabase</h4>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-icon">
+          <img src="sqflite.png" alt="Sqflite" width="64" height="64" loading="lazy" />
+        </div>
+        <h4>Sqflite</h4>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-icon">
+          <img src="admob.png" alt="Admob" width="64" height="64" loading="lazy" />
+        </div>
+        <h4>Admob</h4>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-icon">
+          <img src="rc.png" alt="RevenueCat" width="64" height="64" loading="lazy" />
+        </div>
+        <h4>RevenueCat</h4>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-icon">
+          <img src="petal.png" alt="PetalAds" width="64" height="64" loading="lazy" />
+        </div>
+        <h4>Petal Ads</h4>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-icon">
+          <img src="node.png" alt="Node.js" width="100" height="64" loading="lazy" />
+        </div>
+        <h4>Node.js</h4>
+      </div>
+
+      <div class="tech-item">
+        <div class="tech-icon">
+          <img src="unity.png" alt="Unity" width="80" height="54" loading="lazy" />
+        </div>
+        <h4>UnityAds</h4>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">
+          <img src="git.png" alt="Git" width="64" height="64" loading="lazy" />
+        </div>
+        <h4>Git</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- FlutterFlow Work Section -->
+    <section id="flutterflow" class="flutterflow-work">
+        <div class="container">
+            <h2 class="section-title">FlutterFlow Work</h2>
+            <div class="flutterflow-grid">
+                <div class="flutterflow-card">
+                    <div class="flutterflow-image">🎨</div>
+                    <h3>UI Template Collection</h3>
+                    <p>Beautiful, reusable UI templates including onboarding screens, profile pages, dashboards, and more.</p>
+                    <span class="badge">Templates</span>
+                </div>
+                <div class="flutterflow-card">
+                    <div class="flutterflow-image">🚀</div>
+                    <h3>App MVP Projects</h3>
+                    <p>Rapid MVP development with full functionality, from concept to launch-ready product in record time.</p>
+                    <span class="badge">MVPs</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+     <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Client Testimonials</h2>
+            <div class="scroll-hint">← Scroll to see all testimonials →</div>
+            <div class="testimonials-scroll-container">
+                <div class="testimonials-scroll">
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">"Amazing freelancer, great designer to work with, very attentive and well organized. 10/10 would recommend."</p>
+                        <p class="testimonial-author">— Gabriel Saint-Martin, Upwork</p>
+                    </div>
+                   
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">"I had the pleasure of working with Stefan on a project involving FlutterFlow and Supabase, and I couldn't be more satisfied with the experience. Stefan demonstrated exceptional technical expertise and a strong ability to teach complex concepts in a clear and approachable way."</p>
+                        <p class="testimonial-author">— Oliver Ruby, Upwork</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">"Stefan is very helpful and a great person to work with."</p>
+                        <p class="testimonial-author">— Kimberly Kuya, Upwork</p>
+                    </div>
+                     <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">"Stefan is a very talented and organized designer, he works quickly and is attentive to details. I worked with him many times and will work with him again, 10/10 would recommend."</p>
+                        <p class="testimonial-author">— Gabriel Saint-Martin, Upwork</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Build Something Amazing</h2>
+            <p class="contact-subtitle">Ready to bring your app idea to life? Get in touch!</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">💼</span>
+                    <span>Available on Upwork</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">💵</span>
+                    <span>$15/hour</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">⚡</span>
+                    <span>Fast Response Time</span>
+                </div>
+            </div>
+            <a href="mailto:your.email@example.com" class="cta-button">Contact Me</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Flutter Developer Portfolio. Built with passion.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
