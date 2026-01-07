@@ -685,3 +685,62 @@ section {
         max-width: 260px;
     }
 }
+.project-slider {
+  --peek: 56px;         /* koliko se vidi sledeći slide */
+  --gap: 16px;          /* razmak između slajdova */
+  width: 100%;
+}
+
+.slider-viewport {
+  overflow: hidden;
+  position: relative;
+  padding-right: var(--peek); /* ✅ peek space */
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+}
+
+.slider-viewport.grabbing {
+  cursor: grabbing;
+}
+
+.slider-track {
+  display: flex;
+  gap: var(--gap);
+  will-change: transform;
+  transition: transform 320ms ease;
+}
+
+/* ✅ Slide je malo uži od viewport-a zbog peek-a */
+.slider-slide {
+  flex: 0 0 calc(100% - var(--peek));
+  width: calc(100% - var(--peek));
+  box-sizing: border-box;
+}
+
+/* Dots */
+/* Dots */
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.slider-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  background: #666;          /* siva */
+  opacity: 0.7;
+  transition: transform 160ms ease, opacity 160ms ease, background 160ms ease;
+}
+
+.slider-dot.active {
+  background: #00ff88;       /* ✅ zelena */
+  opacity: 1;
+  transform: scale(1.2);
+}
+
