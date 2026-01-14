@@ -292,3 +292,55 @@ console.log('%cLike what you see? Let\'s work together!', 'font-size: 14px; colo
   // Init
   goTo(0);
 })();
+// Contact form submission with Formspree
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const submitButton = contactForm.querySelector('.send-button');
+        const originalText = submitButton.textContent;
+        
+        // Show loading state
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
+        
+        const formData = new FormData(contactForm);
+        
+        try {
+            const response = await fetch('https://formspree.io/f/xkoonjge', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                // Success
+                submitButton.textContent = '✓ Message Sent!';
+                submitButton.style.backgroundColor = '#00ff88';
+                contactForm.reset();
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    submitButton.textContent = originalText;
+                    submitButton.style.backgroundColor = '';
+                    submitButton.disabled = false;
+                }, 3000);
+            } else {
+                throw new Error('Failed to send');
+            }
+        } catch (error) {
+            // Error
+            submitButton.textContent = '✗ Failed. Try again.';
+            submitButton.style.backgroundColor = '#ff4444';
+            
+            setTimeout(() => {
+                submitButton.textContent = originalText;
+                submitButton.style.backgroundColor = '';
+                submitButton.disabled = false;
+            }, 3000);
+        }
+    });
+}
