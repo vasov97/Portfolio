@@ -1,42 +1,41 @@
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    const target = document.querySelector(this.getAttribute("href"));
     if (target) {
       target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+        behavior: "smooth",
+        block: "start",
       });
     }
   });
 });
 
 // Smooth horizontal scroll for projects with drag
-const projectsScroll = document.querySelector('.projects-scroll');
+const projectsScroll = document.querySelector(".projects-scroll");
 if (projectsScroll) {
   let isDown = false;
   let startX;
   let scrollLeft;
 
-  projectsScroll.addEventListener('mousedown', (e) => {
+  projectsScroll.addEventListener("mousedown", (e) => {
     isDown = true;
-    projectsScroll.style.cursor = 'grabbing';
+    projectsScroll.style.cursor = "grabbing";
     startX = e.pageX - projectsScroll.offsetLeft;
     scrollLeft = projectsScroll.scrollLeft;
   });
 
-  projectsScroll.addEventListener('mouseleave', () => {
+  projectsScroll.addEventListener("mouseleave", () => {
     isDown = false;
-    projectsScroll.style.cursor = 'grab';
+    projectsScroll.style.cursor = "grab";
   });
 
-  projectsScroll.addEventListener('mouseup', () => {
+  projectsScroll.addEventListener("mouseup", () => {
     isDown = false;
-    projectsScroll.style.cursor = 'grab';
+    projectsScroll.style.cursor = "grab";
   });
 
-  projectsScroll.addEventListener('mousemove', (e) => {
+  projectsScroll.addEventListener("mousemove", (e) => {
     if (!isDown) return;
     e.preventDefault();
     const x = e.pageX - projectsScroll.offsetLeft;
@@ -46,30 +45,30 @@ if (projectsScroll) {
 }
 
 // Smooth horizontal scroll for testimonials with drag
-const testimonialsScroll = document.querySelector('.testimonials-scroll');
+const testimonialsScroll = document.querySelector(".testimonials-scroll");
 if (testimonialsScroll) {
   let isDown = false;
   let startX;
   let scrollLeft;
 
-  testimonialsScroll.addEventListener('mousedown', (e) => {
+  testimonialsScroll.addEventListener("mousedown", (e) => {
     isDown = true;
-    testimonialsScroll.style.cursor = 'grabbing';
+    testimonialsScroll.style.cursor = "grabbing";
     startX = e.pageX - testimonialsScroll.offsetLeft;
     scrollLeft = testimonialsScroll.scrollLeft;
   });
 
-  testimonialsScroll.addEventListener('mouseleave', () => {
+  testimonialsScroll.addEventListener("mouseleave", () => {
     isDown = false;
-    testimonialsScroll.style.cursor = 'grab';
+    testimonialsScroll.style.cursor = "grab";
   });
 
-  testimonialsScroll.addEventListener('mouseup', () => {
+  testimonialsScroll.addEventListener("mouseup", () => {
     isDown = false;
-    testimonialsScroll.style.cursor = 'grab';
+    testimonialsScroll.style.cursor = "grab";
   });
 
-  testimonialsScroll.addEventListener('mousemove', (e) => {
+  testimonialsScroll.addEventListener("mousemove", (e) => {
     if (!isDown) return;
     e.preventDefault();
     const x = e.pageX - testimonialsScroll.offsetLeft;
@@ -79,17 +78,17 @@ if (testimonialsScroll) {
 }
 
 // Navbar background on scroll
-const navbar = document.querySelector('.navbar');
+const navbar = document.querySelector(".navbar");
 let lastScroll = 0;
 
-window.addEventListener('scroll', () => {
+window.addEventListener("scroll", () => {
   const currentScroll = window.pageYOffset;
 
   if (navbar) {
     if (currentScroll > 100) {
-      navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+      navbar.style.boxShadow = "0 5px 20px rgba(0, 0, 0, 0.5)";
     } else {
-      navbar.style.boxShadow = 'none';
+      navbar.style.boxShadow = "none";
     }
   }
 
@@ -99,84 +98,90 @@ window.addEventListener('scroll', () => {
 // Intersection Observer for fade-in animations
 const observerOptions = {
   threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
+  rootMargin: "0px 0px -50px 0px",
 };
 
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
+  entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
+      entry.target.style.opacity = "1";
+      entry.target.style.transform = "translateY(0)";
     }
   });
 }, observerOptions);
 
 // Observe all cards and sections
-const animatedElements = document.querySelectorAll('.project-card, .tech-item, .testimonial-card, .flutterflow-card');
-animatedElements.forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+const animatedElements = document.querySelectorAll(
+  ".project-card, .tech-item, .testimonial-card, .flutterflow-card",
+);
+animatedElements.forEach((el) => {
+  el.style.opacity = "0";
+  el.style.transform = "translateY(20px)";
+  el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
   observer.observe(el);
 });
 
 // Add active state to nav links based on scroll position
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav-links a");
 
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(section => {
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach((section) => {
     const sectionTop = section.offsetTop;
     const sectionHeight = section.clientHeight;
     if (window.pageYOffset >= sectionTop - 200) {
-      current = section.getAttribute('id');
+      current = section.getAttribute("id");
     }
   });
 
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href').slice(1) === current) {
-      link.classList.add('active');
+  navLinks.forEach((link) => {
+    link.classList.remove("active");
+    if (link.getAttribute("href").slice(1) === current) {
+      link.classList.add("active");
     }
   });
 });
 
 // Project card click animation
-document.querySelectorAll('.project-card').forEach(card => {
-  card.addEventListener('click', function () {
-    this.style.transform = 'scale(0.98)';
+document.querySelectorAll(".project-card").forEach((card) => {
+  card.addEventListener("click", function () {
+    this.style.transform = "scale(0.98)";
     setTimeout(() => {
-      this.style.transform = '';
+      this.style.transform = "";
     }, 200);
   });
 });
 
 // Add parallax effect to hero section
-window.addEventListener('scroll', () => {
+window.addEventListener("scroll", () => {
   const scrolled = window.pageYOffset;
-  const hero = document.querySelector('.hero');
+  const hero = document.querySelector(".hero");
   if (hero && scrolled < window.innerHeight) {
     hero.style.transform = `translateY(${scrolled * 0.5}px)`;
   }
 });
 
 // Tech stack item hover effect
-document.querySelectorAll('.tech-item').forEach(item => {
-  item.addEventListener('mouseenter', function () {
-    this.style.transform = 'scale(1.05) rotate(2deg)';
+document.querySelectorAll(".tech-item").forEach((item) => {
+  item.addEventListener("mouseenter", function () {
+    this.style.transform = "scale(1.05) rotate(2deg)";
   });
 
-  item.addEventListener('mouseleave', function () {
-    this.style.transform = 'scale(1) rotate(0deg)';
+  item.addEventListener("mouseleave", function () {
+    this.style.transform = "scale(1) rotate(0deg)";
   });
 });
 
 // Console Easter egg
-console.log('%c👋 Hello Developer!', 'font-size: 20px; color: #00ff88; font-weight: bold;');
-console.log('%cLike what you see? Let\'s work together!', 'font-size: 14px; color: #a0a0a0;');
-
-
+console.log(
+  "%c👋 Hello Developer!",
+  "font-size: 20px; color: #00ff88; font-weight: bold;",
+);
+console.log(
+  "%cLike what you see? Let's work together!",
+  "font-size: 14px; color: #a0a0a0;",
+);
 
 /* =========================================================
    ✅ NEW: Project slider (peek + dots + swipe/drag)
@@ -197,7 +202,8 @@ console.log('%cLike what you see? Let\'s work together!', 'font-size: 14px; colo
   let index = 0;
 
   // Read CSS variables from .project-slider container
-  const sliderRoot = viewport.closest(".project-slider") || document.documentElement;
+  const sliderRoot =
+    viewport.closest(".project-slider") || document.documentElement;
 
   function cssNumber(el, varName) {
     const v = getComputedStyle(el).getPropertyValue(varName).trim();
@@ -293,54 +299,80 @@ console.log('%cLike what you see? Let\'s work together!', 'font-size: 14px; colo
   goTo(0);
 })();
 // Contact form submission with Formspree
-const contactForm = document.getElementById('contactForm');
+const contactForm = document.getElementById("contactForm");
 if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const submitButton = contactForm.querySelector('.send-button');
-        const originalText = submitButton.textContent;
-        
-        // Show loading state
-        submitButton.textContent = 'Sending...';
-        submitButton.disabled = true;
-        
-        const formData = new FormData(contactForm);
-        
-        try {
-            const response = await fetch('https://formspree.io/f/xkoonjge', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-            
-            if (response.ok) {
-                // Success
-                submitButton.textContent = '✓ Message Sent!';
-                submitButton.style.backgroundColor = '#00ff88';
-                contactForm.reset();
-                
-                // Reset button after 3 seconds
-                setTimeout(() => {
-                    submitButton.textContent = originalText;
-                    submitButton.style.backgroundColor = '';
-                    submitButton.disabled = false;
-                }, 3000);
-            } else {
-                throw new Error('Failed to send');
-            }
-        } catch (error) {
-            // Error
-            submitButton.textContent = '✗ Failed. Try again.';
-            submitButton.style.backgroundColor = '#ff4444';
-            
-            setTimeout(() => {
-                submitButton.textContent = originalText;
-                submitButton.style.backgroundColor = '';
-                submitButton.disabled = false;
-            }, 3000);
-        }
-    });
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const submitButton = contactForm.querySelector(".send-button");
+    const originalText = submitButton.textContent;
+
+    // Show loading state
+    submitButton.textContent = "Sending...";
+    submitButton.disabled = true;
+
+    const formData = new FormData(contactForm);
+
+    try {
+      const response = await fetch("https://formspree.io/f/xkoonjge", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        // Success
+        submitButton.textContent = "✓ Message Sent!";
+        submitButton.style.backgroundColor = "#00ff88";
+        contactForm.reset();
+
+        // Reset button after 3 seconds
+        setTimeout(() => {
+          submitButton.textContent = originalText;
+          submitButton.style.backgroundColor = "";
+          submitButton.disabled = false;
+        }, 3000);
+      } else {
+        throw new Error("Failed to send");
+      }
+    } catch (error) {
+      // Error
+      submitButton.textContent = "✗ Failed. Try again.";
+      submitButton.style.backgroundColor = "#ff4444";
+
+      setTimeout(() => {
+        submitButton.textContent = originalText;
+        submitButton.style.backgroundColor = "";
+        submitButton.disabled = false;
+      }, 3000);
+    }
+  });
+}
+/* HAMBURGER MENU */
+const ham = document.getElementById("hamburger");
+const menu = document.getElementById("navLinks");
+const overlay = document.getElementById("menuOverlay");
+
+if (ham && menu && overlay) {
+  ham.onclick = () => {
+    ham.classList.toggle("active");
+    menu.classList.toggle("active");
+    overlay.classList.toggle("active");
+  };
+
+  overlay.onclick = () => {
+    ham.classList.remove("active");
+    menu.classList.remove("active");
+    overlay.classList.remove("active");
+  };
+
+  menu.querySelectorAll("a").forEach((a) => {
+    a.onclick = () => {
+      ham.classList.remove("active");
+      menu.classList.remove("active");
+      overlay.classList.remove("active");
+    };
+  });
 }
