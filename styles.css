@@ -640,6 +640,33 @@ section {
     height: 300px;
   }
 }
+.project-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.landing-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: rgba(0, 255, 136, 0.1);
+  color: var(--accent);
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.landing-link:hover {
+  background-color: rgba(0, 255, 136, 0.2);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
 
 @media (max-width: 768px) {
   .nav-links {
