@@ -144,15 +144,20 @@ window.addEventListener("scroll", () => {
 });
 
 // Project card click animation
+// Project card click animation
 document.querySelectorAll(".project-card").forEach((card) => {
-  card.addEventListener("click", function () {
+  card.addEventListener("click", function (e) {
+    // Don't trigger animation if clicking on a link
+    if (e.target.tagName === "A" || e.target.closest("a")) {
+      return;
+    }
+
     this.style.transform = "scale(0.98)";
     setTimeout(() => {
       this.style.transform = "";
     }, 200);
   });
 });
-
 // Add parallax effect to hero section
 window.addEventListener("scroll", () => {
   const scrolled = window.pageYOffset;
@@ -260,6 +265,15 @@ console.log(
   }
 
   viewport.addEventListener("pointerdown", (e) => {
+    // Check if clicking on interactive elements (links, buttons, inputs)
+    const isInteractive = e.target.closest(
+      "a, button, input, textarea, select",
+    );
+
+    if (isInteractive) {
+      return; // Let the link/button work normally
+    }
+
     isDown = true;
     viewport.classList.add("grabbing");
     startX = e.clientX;
