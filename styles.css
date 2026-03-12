@@ -1172,3 +1172,104 @@ section {
     border-bottom: 1px solid #333 !important;
   }
 }
+/* Upwork Badges Section */
+/* Upwork Badges in Hero */
+/* Upwork Badges in Hero */
+.badges-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin: 40px 0;
+  flex-wrap: wrap;
+}
+
+.badge-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.badge-item:hover {
+  transform: translateY(-5px);
+}
+
+.badge-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.badge-item:hover img {
+  transform: scale(1.1);
+}
+
+.badge-item p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+}
+
+.upwork-profile-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background-color: rgba(20, 168, 0, 0.1);
+  border: 1px solid rgba(20, 168, 0, 0.3);
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.upwork-profile-link:hover {
+  background-color: rgba(20, 168, 0, 0.2);
+  border-color: #14a800;
+  transform: translateY(-3px);
+}
+
+.upwork-profile-link svg {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.upwork-profile-link span {
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .badges-wrapper {
+    gap: 30px;
+  }
+
+  .badge-item img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .badge-item p {
+    font-size: 13px;
+  }
+
+  .upwork-profile-link {
+    padding: 10px 20px;
+  }
+
+  .upwork-profile-link svg {
+    width: 35px;
+    height: 35px;
+  }
+
+  .upwork-profile-link span {
+    font-size: 14px;
+  }
+}
