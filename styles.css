@@ -1250,7 +1250,10 @@ section {
   background-color: var(--bg-secondary);
   padding: 100px 0;
 }
-
+.zoom-out {
+  transform: scale(0.8); /* 80% veličine */
+  transform-origin: center;
+}
 .timeline {
   max-width: 900px;
   margin: 0 auto;
