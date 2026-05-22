@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>Fan Quiz - Song Contest Trivia - Support</title>
+    <meta
+      name="description"
+      content="Support page for Fan Quiz - Song Contest Trivia. Eurovision knowledge quiz with 120 questions, global rankings, and daily rewards."
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg-primary: #13112a;
+        --bg-secondary: #1a1836;
+        --purple: #6c3ce1;
+        --purple-dark: #5530b8;
+        --pink: #ff5c8d;
+        --white: #ffffff;
+        --text-light: #e0e0e0;
+        --text-muted: #a0a0b0;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--white);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Fredoka", sans-serif;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 20px;
+        width: 100%;
+      }
+
+      /* Header */
+      header {
+        background: linear-gradient(135deg, var(--purple), var(--pink));
+        padding: 40px 0;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(108, 60, 225, 0.3);
+      }
+
+      .app-logo {
+        width: 100px;
+        height: 100px;
+        background: var(--white);
+        border-radius: 22px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      }
+
+      header h1 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      header p {
+        font-size: 16px;
+        opacity: 0.95;
+      }
+
+      /* Main Content */
+      main {
+        flex: 1;
+        padding: 50px 0;
+      }
+
+      .section {
+        background-color: var(--bg-secondary);
+        border-radius: 20px;
+        padding: 35px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .section h2 {
+        font-size: 28px;
+        color: var(--pink);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section h2::before {
+        content: "";
+        width: 4px;
+        height: 28px;
+        background: linear-gradient(to bottom, var(--purple), var(--pink));
+        border-radius: 2px;
+      }
+
+      .section p {
+        color: var(--text-light);
+        margin-bottom: 15px;
+        line-height: 1.8;
+      }
+
+      /* Description */
+      .description {
+        background: linear-gradient(
+          135deg,
+          rgba(108, 60, 225, 0.15),
+          rgba(255, 92, 141, 0.15)
+        );
+        border: 2px solid var(--purple);
+      }
+
+      .features-list {
+        list-style: none;
+        margin-top: 20px;
+      }
+
+      .features-list li {
+        padding: 10px 0 10px 30px;
+        position: relative;
+        color: var(--text-light);
+      }
+
+      .features-list li::before {
+        content: "✨";
+        position: absolute;
+        left: 0;
+        font-size: 18px;
+      }
+
+      /* Contact */
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 15px;
+        background-color: var(--bg-primary);
+        border-radius: 12px;
+        margin-top: 15px;
+      }
+
+      .contact-item span {
+        font-size: 24px;
+      }
+
+      .contact-item a {
+        color: var(--purple);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .contact-item a:hover {
+        color: var(--pink);
+        text-decoration: underline;
+      }
+
+      /* FAQ */
+      .faq-item {
+        margin-bottom: 25px;
+        padding: 20px;
+        background-color: var(--bg-primary);
+        border-radius: 12px;
+        border-left: 4px solid var(--purple);
+      }
+
+      .faq-item h3 {
+        font-size: 18px;
+        color: var(--purple);
+        margin-bottom: 10px;
+      }
+
+      .faq-item p {
+        color: var(--text-light);
+        margin: 0;
+      }
+
+      /* Privacy & Deletion */
+      .privacy-list {
+        list-style: none;
+        margin-top: 15px;
+      }
+
+      .privacy-list li {
+        padding: 12px 0 12px 30px;
+        position: relative;
+        color: var(--text-light);
+      }
+
+      .privacy-list li::before {
+        content: "🔒";
+        position: absolute;
+        left: 0;
+        font-size: 18px;
+      }
+
+      .deletion-box {
+        background-color: var(--bg-primary);
+        border: 2px solid var(--pink);
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 20px;
+      }
+
+      .deletion-box h3 {
+        color: var(--pink);
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+
+      /* Download Buttons */
+      .download-section {
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .download-btn {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--purple), var(--pink));
+        color: var(--white);
+        padding: 15px 35px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-family: "Fredoka", sans-serif;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(108, 60, 225, 0.4);
+      }
+
+      .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 92, 141, 0.5);
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--bg-secondary);
+        border-top: 2px solid var(--purple);
+        padding: 30px 0;
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      footer p {
+        color: var(--text-muted);
+        font-size: 14px;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 28px;
+        }
+
+        .section {
+          padding: 25px;
+        }
+
+        .section h2 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="app-logo">🎵</div>
+        <h1>Fan Quiz - Song Contest Trivia</h1>
+        <p>Eurovision Knowledge Quiz</p>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <!-- Description -->
+        <div class="section description">
+          <h2>About the App</h2>
+          <p>
+            Test your Eurovision knowledge with Fan Quiz - Song Contest Trivia!
+            Challenge yourself with 120 carefully crafted questions across 3
+            difficulty levels.
+          </p>
+          <ul class="features-list">
+            <li>120 trivia questions (Easy, Medium, Hard)</li>
+            <li>Global real-time rankings</li>
+            <li>Kawaii-style avatars to personalize your profile</li>
+            <li>Daily login rewards</li>
+            <li>Earn coins by watching ads or use them for power-ups</li>
+            <li>Hints, skips, and special power-ups to help you win</li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="section">
+          <h2>Contact & Support</h2>
+          <p>Need help? Have questions or feedback? We're here for you!</p>
+          <div class="contact-item">
+            <span>✉️</span>
+            <div>
+              <strong>Email:</strong>
+              <a href="mailto:vasovmail@gmail.com">vasovmail@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span>👨‍💻</span>
+            <div><strong>Developer:</strong> Magma Dev</div>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section">
+          <h2>Frequently Asked Questions</h2>
+
+          <div class="faq-item">
+            <h3>How do I earn coins?</h3>
+            <p>
+              You can earn coins by completing daily login rewards or by
+              watching rewarded video ads. Coins can be used to purchase hints,
+              skips, and other power-ups to help you progress!
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>What are hints and skips?</h3>
+            <p>
+              Hints reveal part of the answer to help you when you're stuck.
+              Skips let you bypass a difficult question and move to the next
+              one. Both cost coins but can save your streak!
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>How does the daily reward work?</h3>
+            <p>
+              Log in every day to collect free coins! The more consecutive days
+              you log in, the bigger your reward. Don't break your streak!
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>How are rankings calculated?</h3>
+            <p>
+              Global rankings are based on your total points earned from
+              correctly answering questions. Harder questions award more points.
+              Compete with Eurovision fans worldwide!
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>How do I change my avatar?</h3>
+            <p>
+              Go to your profile settings and tap on your current avatar. Choose
+              from our collection of kawaii-style avatars to personalize your
+              account!
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>How do I delete my account?</h3>
+            <p>
+              You can delete your account from the settings menu on the home
+              screen. Alternatively, email us at vasovmail@gmail.com and we'll
+              delete your account within 48 hours.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>I found a bug, how do I report it?</h3>
+            <p>
+              Please email us at vasovmail@gmail.com with details about the bug,
+              including your device model and iOS/Android version. We appreciate
+              your help!
+            </p>
+          </div>
+        </div>
+
+        <!-- Privacy Policy -->
+        <div class="section">
+          <h2>Privacy Policy</h2>
+          <p>
+            Your privacy is important to us. Here's what data we collect and how
+            we use it:
+          </p>
+          <ul class="privacy-list">
+            <li>
+              We collect your email address for authentication via Firebase
+            </li>
+            <li>We use AdMob for ads which may collect device identifiers</li>
+            <li>
+              We store game progress (points, coins, level) in Firebase
+              Firestore
+            </li>
+            <li>We do not sell your data to third parties</li>
+            <li>Contact vasovmail@gmail.com for data deletion requests</li>
+          </ul>
+        </div>
+
+        <!-- Account Deletion -->
+        <div class="section">
+          <h2>Account Deletion</h2>
+          <p>
+            You have full control over your account and data. We respect your
+            right to be forgotten.
+          </p>
+
+          <div class="deletion-box">
+            <h3>How to Delete Your Account:</h3>
+            <p style="margin-bottom: 10px">
+              <strong>Option 1:</strong> Open the app and go to Settings on the
+              home screen. Tap "Delete Account" and confirm your choice.
+            </p>
+            <p>
+              <strong>Option 2:</strong> Email us at
+              <a
+                href="mailto:vasovmail@gmail.com"
+                style="color: var(--pink); text-decoration: underline"
+                >vasovmail@gmail.com</a
+              >
+              with "Delete Account" in the subject line. We'll process your
+              request within 48 hours.
+            </p>
+          </div>
+
+          <p
+            style="margin-top: 15px; color: var(--text-muted); font-size: 14px"
+          >
+            ⚠️ Note: Account deletion is permanent and cannot be undone. All
+            your progress, coins, and rankings will be lost.
+          </p>
+        </div>
+
+        <!-- Download Section -->
+        <div class="download-section">
+          <a href="#" class="download-btn"> 📱 Download Fan Quiz </a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Magma Dev. All rights reserved.</p>
+        <p style="margin-top: 5px">Fan Quiz - Song Contest Trivia</p>
+      </div>
+    </footer>
+  </body>
+</html>
