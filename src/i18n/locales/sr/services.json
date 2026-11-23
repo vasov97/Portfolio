@@ -1,0 +1,28 @@
+{
+  "eyebrow": "Usluge",
+  "title": "Sve što vam treba da",
+  "titleHighlight": "lansirate aplikaciju",
+  "subtitle": "Jedan developer, od početka do kraja — od prvog ekrana do App Store-a i dalje.",
+  "items": [
+    {
+      "title": "Razvoj MVP-a",
+      "description": "Brzo proverite ideju kroz fokusiranu prvu verziju za iOS i Android — za nekoliko nedelja, ne meseci.",
+      "points": ["Samo ključne funkcije", "Pravi korisnici od prvog dana", "Spremno za kasniji rast"]
+    },
+    {
+      "title": "Kompletna mobilna aplikacija",
+      "description": "Aplikacije spremne za produkciju sa backend-om, plaćanjima, push notifikacijama i analitikom — napravljene da rastu.",
+      "points": ["Firebase ili Supabase backend", "Pretplate i kupovine u aplikaciji", "Push, analitika i izveštaji o greškama"]
+    },
+    {
+      "title": "FlutterFlow aplikacije",
+      "description": "Brza vizuelna izrada u FlutterFlow-u, uz prilagođeni Flutter kod tamo gde low-code ne može dalje.",
+      "points": ["Brzi prototipovi", "Prilagođeni widgeti i akcije", "Izvoz u kompletan Flutter kod"]
+    },
+    {
+      "title": "Održavanje i spasavanje",
+      "description": "Preuzimam postojeću Flutter aplikaciju — ispravljam greške, ažuriram pakete i rešavam odbijene verzije na store-ovima.",
+      "points": ["Ispravke grešaka i performanse", "Rešavanje odbijanja na store-u", "Dalji razvoj funkcija"]
+    }
+  ]
+}

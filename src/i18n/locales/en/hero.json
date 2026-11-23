@@ -1,0 +1,14 @@
+{
+  "badge": "Available for new projects",
+  "titleLine1": "Mobile apps",
+  "titleLine2": "built to ship.",
+  "subtitle": "I design and build iOS & Android apps with Flutter — from the first idea to App Store launch, for startups and businesses worldwide.",
+  "ctaPrimary": "Book a free call",
+  "ctaSecondary": "See my apps",
+  "stats": [
+    { "value": "Top Rated Plus", "label": "on Upwork" },
+    { "value": "100%", "label": "Job Success Score" },
+    { "value": "10+", "label": "apps shipped" },
+    { "value": "4+", "label": "years of experience" }
+  ]
+}

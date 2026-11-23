@@ -1,0 +1,60 @@
+---
+import type { TechItem } from '../../data/stack';
+
+interface Props {
+  item: TechItem;
+}
+
+const { item } = Astro.props;
+---
+
+<li class="chip">
+  {
+    item.logo ? (
+      <img src={item.logo} alt="" width="28" height="28" loading="lazy" decoding="async" />
+    ) : (
+      <span class="mono" aria-hidden="true">
+        {item.name.charAt(0)}
+      </span>
+    )
+  }
+  <span class="name">{item.name}</span>
+</li>
+
+<style>
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .chip:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+  img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+  .mono {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--accent-2);
+  }
+  .name {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+</style>

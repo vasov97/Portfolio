@@ -1,0 +1,13 @@
+{
+  "eyebrow": "Tehnologije",
+  "title": "Proverени alati,",
+  "titleHighlight": "aplikacije spremne za produkciju",
+  "subtitle": "Tehnologije koje koristim da brzo isporučim kvalitetne aplikacije.",
+  "groups": {
+    "mobile": "Mobilni razvoj",
+    "backend": "Backend i podaci",
+    "monetization": "Monetizacija",
+    "engagement": "Angažovanje i AI",
+    "devices": "Uređaji i alati"
+  }
+}

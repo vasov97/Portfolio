@@ -1,0 +1,24 @@
+name: Sense Garden
+order: 6
+color: '#1f6b4f'
+platforms: [android]
+category:
+  en: Healthcare
+  sr: Zdravstvo
+# cover: ../../assets/apps/sense-garden-cover.png
+tagline:
+  en: Sensory therapy app for caregivers and the people they support.
+  sr: Aplikacija za senzornu terapiju za negovatelje i osobe o kojima brinu.
+summary:
+  en: Sense Garden is a multi-role app where managers and caregivers assign sensory games and media to the people they support, with role-based access for every user type.
+  sr: Sense Garden je aplikacija sa više uloga u kojoj menadžeri i negovatelji dodeljuju senzorne igre i sadržaje osobama o kojima brinu, sa pristupom prilagođenim svakoj ulozi.
+features:
+  en:
+    - Manager, caregiver and user roles
+    - Assignable sensory games and videos
+    - Multiple build flavors
+  sr:
+    - Uloge menadžera, negovatelja i korisnika
+    - Senzorne igre i video sadržaji koji se dodeljuju
+    - Više verzija aplikacije (flavors)
+tech: [Flutter, Firebase]

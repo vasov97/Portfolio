@@ -1,0 +1,46 @@
+---
+import MoreAppCard from '../apps/MoreAppCard.astro';
+import { getApps, type App } from '../../lib/apps';
+import { useTranslations, type Locale } from '../../i18n/utils';
+
+interface Props {
+  current: App;
+  locale: Locale;
+}
+
+const { current, locale } = Astro.props;
+const t = useTranslations(locale);
+const related = (await getApps()).filter((a) => a.id !== current.id).slice(0, 3);
+---
+
+{
+  related.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2>{t('appDetail.related')}</h2>
+        <div class="grid">
+          {related.map((app) => (
+            <MoreAppCard app={app} locale={locale} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  h2 {
+    margin-bottom: var(--space-6);
+    font-size: var(--fs-h2);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

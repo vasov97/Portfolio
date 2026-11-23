@@ -1,0 +1,12 @@
+{
+  "title": "More apps",
+  "subtitle": "Client projects and my own products.",
+  "prev": "Scroll left",
+  "next": "Scroll right",
+  "platforms": {
+    "ios": "iOS",
+    "android": "Android",
+    "web": "Web",
+    "desktop": "Desktop"
+  }
+}

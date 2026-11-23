@@ -1,0 +1,79 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'light' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  external?: boolean;
+  dot?: boolean;
+}
+
+const { href, variant = 'primary', size = 'md', external = false, dot = false } = Astro.props;
+const externalAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<a href={href} class:list={['btn', `btn--${variant}`, `btn--${size}`]} {...externalAttrs}>
+  <slot />
+  {dot && <span class="dot" aria-hidden="true"></span>}
+</a>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    white-space: nowrap;
+    transition:
+      transform var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease),
+      background-color var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn--sm {
+    padding: 0.6rem 1rem;
+    font-size: var(--fs-sm);
+  }
+  .btn--md {
+    padding: 0.85rem 1.4rem;
+    font-size: var(--fs-base);
+  }
+  .btn--lg {
+    padding: 1.05rem 1.8rem;
+    font-size: var(--fs-lg);
+  }
+
+  .btn--primary {
+    background: var(--accent-gradient);
+    color: #04121f;
+  }
+  .btn--primary:hover {
+    box-shadow: 0 8px 30px -8px rgba(43, 140, 255, 0.6);
+  }
+
+  .btn--light {
+    background: var(--text);
+    color: #000;
+  }
+
+  .btn--ghost {
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+  }
+  .btn--ghost:hover {
+    border-color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+</style>

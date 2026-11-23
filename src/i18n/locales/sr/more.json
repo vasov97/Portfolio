@@ -1,0 +1,12 @@
+{
+  "title": "Još aplikacija",
+  "subtitle": "Klijentski projekti i moji sopstveni proizvodi.",
+  "prev": "Pomeri levo",
+  "next": "Pomeri desno",
+  "platforms": {
+    "ios": "iOS",
+    "android": "Android",
+    "web": "Web",
+    "desktop": "Desktop"
+  }
+}

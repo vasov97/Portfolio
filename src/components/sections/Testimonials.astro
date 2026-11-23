@@ -1,0 +1,99 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import Button from '../ui/Button.astro';
+import TestimonialCard from '../testimonials/TestimonialCard.astro';
+import { TESTIMONIALS } from '../../data/testimonials';
+import { SITE } from '../../config/site';
+import { getLocale, useTranslations } from '../../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const avg = TESTIMONIALS.reduce((sum, r) => sum + r.rating, 0) / TESTIMONIALS.length;
+---
+
+<section id="testimonials" class="section">
+  <div class="container">
+    <SectionHeader
+      eyebrow={t('testimonials.eyebrow')}
+      title={t('testimonials.title')}
+      highlight={t('testimonials.titleHighlight')}
+    />
+
+    <div class="summary">
+      <div class="metric">
+        <strong>{avg.toFixed(1)} <span class="star">★</span></strong>
+        <span>{t('testimonials.rating')}</span>
+      </div>
+      <div class="metric">
+        <strong>100%</strong>
+        <span>{t('testimonials.jss')}</span>
+      </div>
+      <div class="metric">
+        <strong>{t('testimonials.badge')}</strong>
+        <span>Upwork</span>
+      </div>
+      <div class="cta">
+        <Button href={SITE.upwork} variant="ghost" size="sm" external>
+          {t('testimonials.viewProfile')} ↗
+        </Button>
+      </div>
+    </div>
+
+    <div class="grid">
+      {TESTIMONIALS.map((item) => <TestimonialCard item={item} locale={locale} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-7);
+    margin-bottom: var(--space-7);
+    padding: var(--space-5) var(--space-6);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(90deg, rgba(43, 140, 255, 0.08), transparent 60%);
+  }
+  .metric {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .metric strong {
+    font-size: var(--fs-h3);
+    font-weight: 500;
+    letter-spacing: var(--tracking-tight);
+  }
+  .metric span {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+  .star {
+    color: #ffc542;
+  }
+  .cta {
+    margin-left: auto;
+  }
+
+  .grid {
+    columns: 2;
+    column-gap: var(--space-4);
+  }
+
+  @media (max-width: 760px) {
+    .grid {
+      columns: 1;
+    }
+    .summary {
+      gap: var(--space-5);
+    }
+    .cta {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+</style>

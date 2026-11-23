@@ -1,0 +1,53 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  highlight?: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+}
+
+const { eyebrow, title, highlight, subtitle, align = 'left' } = Astro.props;
+---
+
+<header class:list={['sh', `sh--${align}`]}>
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <h2>
+    {title}
+    {highlight && <span class="highlight text-gradient">{highlight.trim()}</span>}
+  </h2>
+  {subtitle && <p class="sub">{subtitle}</p>}
+</header>
+
+<style>
+  .sh {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 760px;
+    margin-bottom: var(--space-8);
+  }
+  .sh--center {
+    align-items: center;
+    text-align: center;
+    margin-inline: auto;
+  }
+  .eyebrow {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+  }
+  h2 {
+    font-size: var(--fs-h1);
+  }
+  .highlight {
+    display: block;
+  }
+  .sub {
+    max-width: 600px;
+    font-size: var(--fs-lg);
+    color: var(--text-muted);
+  }
+</style>

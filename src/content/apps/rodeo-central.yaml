@@ -1,0 +1,52 @@
+name: Rodeo Central
+order: 3
+featured: true
+color: '#0f2342'
+icon: /images/apps/rodeo_app_logo.png
+screenshot: /images/apps/rodeo_home.png
+
+cover: /images/apps/cover_rodeo.png
+platforms: [ios, android, web, desktop]
+category:
+  en: Sports & Events
+  sr: Sport i događaji
+# cover: ../../assets/apps/rodeo-central-cover.png
+tagline:
+  en: The complete platform for rodeo fans, judges and organizers.
+  sr: Kompletna platforma za ljubitelje rodea, sudije i organizatore.
+summary:
+  en: Rodeo Central brings rodeo events into one ecosystem — a mobile app for fans and competitors, a web app for judges and a desktop admin panel for organizers, all synced in real time.
+  sr: Rodeo Central objedinjuje rodeo događaje u jedan ekosistem — mobilna aplikacija za fanove i takmičare, web aplikacija za sudije i desktop admin panel za organizatore, sve sinhronizovano u realnom vremenu.
+stats:
+  - value: '3'
+    label:
+      en: Connected products — mobile app, judges web app and admin panel
+      sr: Povezana proizvoda — mobilna aplikacija, web aplikacija za sudije i admin panel
+  - value:
+      en: Live
+      sr: Uživo
+    label:
+      en: Real-time results, draws and push notifications
+      sr: Rezultati, žrebovi i notifikacije u realnom vremenu
+  - value:
+      en: Client
+      sr: Klijent
+    label:
+      en: Long-term product partnership, from MVP to ongoing features
+      sr: Dugoročna saradnja, od MVP-a do novih funkcionalnosti
+features:
+  en:
+    - Mobile app for fans and competitors
+    - Judges web app for live scoring
+    - Desktop admin panel with usage analytics
+    - Live results and draw management
+    - Event calendar, chat and push notifications
+  sr:
+    - Mobilna aplikacija za fanove i takmičare
+    - Web aplikacija za sudije za ocenjivanje uživo
+    - Desktop admin panel sa analitikom korišćenja
+    - Rezultati uživo i upravljanje žrebovima
+    - Kalendar događaja, čet i push notifikacije
+tech: [Flutter, Supabase, OneSignal, Firebase]
+links:
+  website: https://rodeolanding.vercel.app

@@ -1,0 +1,53 @@
+---
+import {
+  LOCALES,
+  HTML_LANG,
+  getLocale,
+  switchLocalePath,
+  useTranslations,
+} from '../../i18n/utils';
+
+const current = getLocale(Astro.currentLocale);
+const t = useTranslations(current);
+---
+
+<div class="lang" role="group" aria-label={t('common.lang.label')}>
+  {
+    LOCALES.map((l) => (
+      <a
+        href={switchLocalePath(Astro.url.pathname, l)}
+        hreflang={HTML_LANG[l]}
+        lang={HTML_LANG[l]}
+        title={t(`common.lang.${l}`)}
+        aria-current={l === current ? 'true' : undefined}
+      >
+        {l.toUpperCase()}
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .lang {
+    display: inline-flex;
+    padding: 3px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+  a {
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--text-dim);
+    transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  }
+  a:hover {
+    color: var(--text);
+  }
+  a[aria-current='true'] {
+    background: var(--surface-2);
+    color: var(--text);
+  }
+</style>

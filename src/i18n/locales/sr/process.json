@@ -1,0 +1,24 @@
+{
+  "eyebrow": "Proces",
+  "title": "Od ideje do store-a",
+  "titleHighlight": "u četiri koraka",
+  "subtitle": "Jasan proces bez iznenađenja — uvek znate šta se pravi i kada.",
+  "steps": [
+    {
+      "title": "Uvodni poziv",
+      "description": "Besplatan poziv od 30 minuta da razumem vašu ideju, korisnike i ciljeve."
+    },
+    {
+      "title": "Plan i procena",
+      "description": "Obim funkcija, tok ekrana i jasna procena vremena i cene."
+    },
+    {
+      "title": "Razvoj i testiranje",
+      "description": "Nedeljni izveštaji i test verzije na vašem telefonu, da vidite napredak u realnom vremenu."
+    },
+    {
+      "title": "Lansiranje i podrška",
+      "description": "Objava na App Store-u i Google Play-u, rešavanje pregleda i podrška nakon lansiranja."
+    }
+  ]
+}

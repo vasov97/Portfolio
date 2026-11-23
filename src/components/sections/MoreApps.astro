@@ -1,0 +1,118 @@
+---
+import Icon from '../ui/Icon.astro';
+import MoreAppCard from '../apps/MoreAppCard.astro';
+import { getMoreApps } from '../../lib/apps';
+import { getLocale, useTranslations } from '../../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const apps = await getMoreApps();
+---
+
+{
+  apps.length > 0 && (
+    <section class="more" aria-labelledby="more-title" data-rail>
+      <div class="container head">
+        <div>
+          <h2 id="more-title">{t('more.title')}</h2>
+          <p>{t('more.subtitle')}</p>
+        </div>
+        <div class="buttons">
+          <button class="nav-btn" type="button" aria-label={t('more.prev')} data-prev>
+            <Icon name="arrow-left" />
+          </button>
+          <button class="nav-btn" type="button" aria-label={t('more.next')} data-next>
+            <Icon name="arrow-right" />
+          </button>
+        </div>
+      </div>
+
+      <div class="track" data-track>
+        {apps.map((app) => (
+          <MoreAppCard app={app} locale={locale} />
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .more {
+    --edge: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+    padding-bottom: var(--section-y);
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-5);
+    margin-bottom: var(--space-6);
+  }
+  h2 {
+    font-size: var(--fs-h2);
+  }
+  .head p {
+    margin-top: var(--space-2);
+    color: var(--text-muted);
+  }
+
+  .buttons {
+    display: flex;
+    gap: var(--space-2);
+  }
+  .nav-btn {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border-strong);
+    border-radius: 50%;
+    transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+  .nav-btn:hover {
+    background: var(--text);
+    color: #000;
+  }
+
+  .track {
+    display: flex;
+    gap: var(--space-4);
+    padding-inline: var(--edge);
+    scroll-padding-inline: var(--edge);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .buttons {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-rail]').forEach((rail) => {
+    const track = rail.querySelector<HTMLElement>('[data-track]');
+    if (!track) return;
+
+    const step = () => {
+      const card = track.querySelector<HTMLElement>('[data-card]');
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      return (card?.offsetWidth ?? 300) + gap;
+    };
+
+    rail
+      .querySelector('[data-prev]')
+      ?.addEventListener('click', () => track.scrollBy({ left: -step() }));
+    rail
+      .querySelector('[data-next]')
+      ?.addEventListener('click', () => track.scrollBy({ left: step() }));
+  });
+</script>

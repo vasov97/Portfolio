@@ -1,0 +1,48 @@
+{
+  "eyebrow": "Estimate",
+  "title": "How much will",
+  "titleHighlight": "your app cost?",
+  "subtitle": "Pick what you need and get an instant ballpark. The exact price comes after a free call.",
+  "platform": {
+    "legend": "Platform",
+    "ios": "iOS",
+    "android": "Android",
+    "both": "iOS + Android"
+  },
+  "size": {
+    "legend": "App size",
+    "simple": "Simple",
+    "simpleHint": "MVP · up to ~6 screens",
+    "medium": "Medium",
+    "mediumHint": "~10–15 screens",
+    "complex": "Complex",
+    "complexHint": "20+ screens"
+  },
+  "features": {
+    "legend": "Features",
+    "auth": "User accounts & login",
+    "backend": "Backend & database",
+    "payments": "Payments & subscriptions",
+    "push": "Push notifications",
+    "chat": "Chat & real-time",
+    "maps": "Maps & location",
+    "ai": "AI features",
+    "admin": "Admin panel",
+    "analytics": "Analytics & crash reports",
+    "i18n": "Multiple languages"
+  },
+  "design": {
+    "legend": "Design",
+    "have": "I have designs",
+    "need": "I need design"
+  },
+  "result": {
+    "label": "Estimated cost",
+    "timeline": "Estimated timeline",
+    "weeks": " weeks",
+    "note": "Ballpark only — includes development, testing and store submission. Exact quote after a free call.",
+    "bookCall": "Book a free call",
+    "sendDetails": "Send me these details"
+  },
+  "summaryTitle": "Estimate request"
+}

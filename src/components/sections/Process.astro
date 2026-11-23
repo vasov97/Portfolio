@@ -1,0 +1,62 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import ProcessStep from '../process/ProcessStep.astro';
+import { getLocale, useTranslations, tRaw } from '../../i18n/utils';
+
+type Step = { title: string; description: string };
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const steps = tRaw<Step[]>(locale, 'process.steps');
+---
+
+<section id="process" class="section">
+  <div class="container">
+    <SectionHeader
+      eyebrow={t('process.eyebrow')}
+      title={t('process.title')}
+      highlight={t('process.titleHighlight')}
+      subtitle={t('process.subtitle')}
+    />
+
+    <ol class="steps">
+      {steps.map((s, i) => <ProcessStep index={i} {...s} />)}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+    list-style: none;
+  }
+  /* connecting line behind the dots */
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--border-strong) 40%, transparent 100%);
+  }
+
+  @media (max-width: 900px) {
+    .steps {
+      grid-template-columns: 1fr;
+      gap: var(--space-7);
+    }
+    .steps::before {
+      top: 0;
+      bottom: 0;
+      left: 22px;
+      right: auto;
+      width: 1px;
+      height: auto;
+      background: linear-gradient(180deg, var(--accent) 0%, var(--border-strong) 50%, transparent 100%);
+    }
+  }
+</style>

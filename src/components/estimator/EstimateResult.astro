@@ -1,0 +1,99 @@
+---
+import Button from '../ui/Button.astro';
+import { SITE } from '../../config/site';
+import { formatUSD, type Estimate } from '../../lib/estimate';
+import { localizePath, useTranslations, type Locale } from '../../i18n/utils';
+
+interface Props {
+  initial: Estimate;
+  locale: Locale;
+}
+
+const { initial, locale } = Astro.props;
+const t = useTranslations(locale);
+const contactHref = `${localizePath('', locale)}#contact`;
+---
+
+<aside class="result" aria-live="polite">
+  <p class="label">{t('estimator.result.label')}</p>
+  <p class="price" data-price>
+    {formatUSD(initial.low, locale)} – {formatUSD(initial.high, locale)}
+  </p>
+
+  <div class="timeline">
+    <span>{t('estimator.result.timeline')}</span>
+    <strong>
+      <span data-weeks>{initial.weeksLow}–{initial.weeksHigh}</span>
+      {t('estimator.result.weeks')}
+    </strong>
+  </div>
+
+  <p class="note">{t('estimator.result.note')}</p>
+
+  <div class="actions">
+    <Button href={SITE.calendly} external dot>{t('estimator.result.bookCall')}</Button>
+    <a href={contactHref} class="details-link" data-send-details>
+      {t('estimator.result.sendDetails')} →
+    </a>
+  </div>
+</aside>
+
+<style>
+  .result {
+    position: sticky;
+    top: calc(var(--nav-h) + var(--space-6));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-7) var(--space-6);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(80% 60% at 100% 0%, rgba(43, 140, 255, 0.18), transparent 70%),
+      var(--surface);
+  }
+  .label {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+  .price {
+    margin-top: calc(var(--space-4) * -1);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 500;
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.1;
+  }
+  .timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: var(--space-4);
+    border-block: 1px solid var(--border);
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+  .timeline strong {
+    font-size: var(--fs-lg);
+    font-weight: 500;
+    color: var(--text);
+  }
+  .note {
+    font-size: var(--fs-xs);
+    color: var(--text-dim);
+  }
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+  .details-link {
+    text-align: center;
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    transition: color var(--dur) var(--ease);
+  }
+  .details-link:hover {
+    color: var(--text);
+  }
+</style>

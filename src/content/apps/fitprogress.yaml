@@ -1,0 +1,48 @@
+name: FitProgress
+order: 1
+featured: true
+color: '#0f3d2e'
+icon: /images/apps/fitprogress_logo.png
+screenshot: /images/apps/fit_home.png
+cover: /images/apps/fit_cover.png
+platforms: [ios, android]
+category:
+  en: Health & Fitness
+  sr: Zdravlje i fitnes
+# cover: ../../assets/apps/fitprogress-cover.png
+tagline:
+  en: A workout tracker built for real progress.
+  sr: Praćenje treninga napravljeno za stvaran napredak.
+summary:
+  en: FitProgress lets lifters log workouts, follow proven training programs and see their strength grow over time. Fully offline, fast, and live on both stores.
+  sr: FitProgress omogućava vežbačima da beleže treninge, prate proverene programe i vide kako im snaga raste. Radi potpuno offline, brz je i dostupan na oba store-a.
+stats:
+  - value: '28'
+    label:
+      en: Ready-made workout programs, from PPL to Wendler 5/3/1
+      sr: Gotovih programa treninga, od PPL do Wendler 5/3/1
+  - value:
+      en: Offline
+      sr: Offline
+    label:
+      en: All data stored on device — works anywhere, even in the gym basement
+      sr: Svi podaci čuvaju se na uređaju — radi svuda, čak i u podrumu teretane
+  - value: iOS + Android
+    label:
+      en: Published on the App Store and Google Play
+      sr: Objavljeno na App Store-u i Google Play-u
+features:
+  en:
+    - Workout logging with sets, reps and weight
+    - 28 training program templates
+    - Auto-saved sessions that survive app restarts
+    - In-app purchases
+  sr:
+    - Beleženje treninga sa serijama, ponavljanjima i težinom
+    - 28 šablona programa treninga
+    - Automatsko čuvanje treninga i posle restarta aplikacije
+    - Kupovina unutar aplikacije
+tech: [Flutter, Hive, RevenueCat]
+links:
+  appStore: https://apps.apple.com/us/app/fitprogress-workout-tracker/id6760131481
+  googlePlay: https://play.google.com/store/apps/details?id=com.fitprogress.tracker

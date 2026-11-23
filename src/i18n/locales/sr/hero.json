@@ -1,0 +1,14 @@
+{
+  "badge": "Dostupan za nove projekte",
+  "titleLine1": "Mobilne aplikacije",
+  "titleLine2": "spremne za lansiranje.",
+  "subtitle": "Dizajniram i razvijam iOS i Android aplikacije u Flutter-u — od prve ideje do objave na App Store-u, za startape i firme širom sveta.",
+  "ctaPrimary": "Zakaži besplatan poziv",
+  "ctaSecondary": "Pogledaj aplikacije",
+  "stats": [
+    { "value": "Top Rated Plus", "label": "na Upwork-u" },
+    { "value": "100%", "label": "Job Success Score" },
+    { "value": "10+", "label": "objavljenih aplikacija" },
+    { "value": "4+", "label": "godine iskustva" }
+  ]
+}

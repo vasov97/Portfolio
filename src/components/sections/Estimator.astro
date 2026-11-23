@@ -1,0 +1,140 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import OptionGroup from '../estimator/OptionGroup.astro';
+import EstimateResult from '../estimator/EstimateResult.astro';
+import { ESTIMATOR } from '../../data/estimator';
+import { calculate } from '../../lib/estimate';
+import { getLocale, useTranslations } from '../../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const d = ESTIMATOR.defaults;
+
+const opts = (group: string, items: readonly { id: string }[], withHint = false) =>
+  items.map((i) => ({
+    id: i.id,
+    label: t(`estimator.${group}.${i.id}`),
+    hint: withHint ? t(`estimator.${group}.${i.id}Hint`) : undefined,
+  }));
+
+const initial = calculate({ ...d, features: [...d.features] });
+---
+
+<section id="estimate" class="section">
+  <div class="container">
+    <SectionHeader
+      eyebrow={t('estimator.eyebrow')}
+      title={t('estimator.title')}
+      highlight={t('estimator.titleHighlight')}
+      subtitle={t('estimator.subtitle')}
+    />
+
+    <div
+      class="layout"
+      data-estimator
+      data-locale={locale}
+      data-summary-title={t('estimator.summaryTitle')}
+    >
+      <form class="form" data-form>
+        <OptionGroup
+          legend={t('estimator.platform.legend')}
+          name="platform"
+          type="radio"
+          options={opts('platform', ESTIMATOR.platforms)}
+          checked={[d.platform]}
+        />
+        <OptionGroup
+          legend={t('estimator.size.legend')}
+          name="size"
+          type="radio"
+          options={opts('size', ESTIMATOR.sizes, true)}
+          checked={[d.size]}
+        />
+        <OptionGroup
+          legend={t('estimator.features.legend')}
+          name="features"
+          type="checkbox"
+          options={opts('features', ESTIMATOR.features)}
+          checked={d.features}
+          columns={2}
+        />
+        <OptionGroup
+          legend={t('estimator.design.legend')}
+          name="design"
+          type="radio"
+          options={opts('design', ESTIMATOR.design)}
+          checked={[d.design]}
+          columns={2}
+        />
+      </form>
+
+      <EstimateResult initial={initial} locale={locale} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-7);
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-7);
+  }
+  @media (max-width: 960px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  import { calculate, formatUSD } from '../../lib/estimate';
+
+  const root = document.querySelector<HTMLElement>('[data-estimator]');
+  const form = root?.querySelector<HTMLFormElement>('[data-form]');
+  const priceEl = root?.querySelector<HTMLElement>('[data-price]');
+  const weeksEl = root?.querySelector<HTMLElement>('[data-weeks]');
+  const sendLink = root?.querySelector<HTMLAnchorElement>('[data-send-details]');
+
+  if (root && form && priceEl && weeksEl) {
+    const locale = root.dataset.locale ?? 'en';
+
+    const read = () => {
+      const fd = new FormData(form);
+      return {
+        platform: String(fd.get('platform') ?? ''),
+        size: String(fd.get('size') ?? ''),
+        design: String(fd.get('design') ?? ''),
+        features: fd.getAll('features').map(String),
+      };
+    };
+
+    const update = () => {
+      const e = calculate(read());
+      priceEl.textContent = `${formatUSD(e.low, locale)} – ${formatUSD(e.high, locale)}`;
+      weeksEl.textContent = `${e.weeksLow}–${e.weeksHigh}`;
+    };
+
+    form.addEventListener('change', update);
+    form.addEventListener('submit', (e) => e.preventDefault());
+
+    // Saves the selection so the contact form can pre-fill the message
+    sendLink?.addEventListener('click', () => {
+      const chosen = [...form.querySelectorAll<HTMLInputElement>('input:checked')]
+        .map((i) => i.closest('label')?.querySelector('.label')?.textContent?.trim())
+        .filter(Boolean)
+        .join(', ');
+      const summary = `${root.dataset.summaryTitle}: ${chosen}\n${priceEl.textContent} · ${weeksEl.textContent}`;
+      try {
+        sessionStorage.setItem('estimate-summary', summary);
+      } catch {
+        /* storage unavailable, ignore */
+      }
+    });
+  }
+</script>

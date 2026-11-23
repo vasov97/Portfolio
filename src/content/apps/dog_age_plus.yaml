@@ -1,0 +1,24 @@
+name: DogAge Plus
+order: 5
+color: '#b4531f'
+platforms: [ios, android]
+category:
+  en: Pets & Lifestyle
+  sr: Ljubimci i životni stil
+# cover: ../../assets/apps/dog-age-plus-cover.png
+tagline:
+  en: Everyday care for every dog in the family.
+  sr: Svakodnevna briga za svakog psa u porodici.
+summary:
+  en: DogAge Plus helps owners track walks, meals and medication for multiple dogs, with achievements that make good care habits fun.
+  sr: DogAge Plus pomaže vlasnicima da prate šetnje, obroke i lekove za više pasa, uz dostignuća koja dobre navike čine zabavnim.
+features:
+  en:
+    - Multi-dog profiles
+    - Walk, meal and medication tracking
+    - Achievements and rewards
+  sr:
+    - Profili za više pasa
+    - Praćenje šetnji, obroka i lekova
+    - Dostignuća i nagrade
+tech: [Flutter, Firebase, Cubit]

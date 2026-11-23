@@ -1,0 +1,91 @@
+---
+import type { App } from '../../lib/apps';
+
+interface Props {
+  app: App;
+  alt: string;
+  eager?: boolean;
+}
+
+const { app, alt, eager = false } = Astro.props;
+const { cover, screenshot, name } = app.data;
+const loading = eager ? 'eager' : 'lazy';
+---
+
+{
+  cover ? (
+    // 1. Full-bleed promo artwork: fills the whole visual area
+    <img src={cover} alt={alt} loading={loading} decoding="async" class="cover" />
+  ) : screenshot ? (
+    // 2. Plain screenshot inside a CSS phone frame
+    <div class="phone">
+      <img src={screenshot} alt={alt} loading={loading} decoding="async" />
+      <span class="island" aria-hidden="true"></span>
+    </div>
+  ) : (
+    // 3. Nothing yet: branded placeholder
+    <div class="phone placeholder" aria-hidden="true">
+      <span class="letter">{name.charAt(0)}</span>
+      <span class="island"></span>
+    </div>
+  )
+}
+
+<style>
+  .cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    /* soft fade at the top so it blends into the card */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 18%);
+  }
+
+  .phone {
+    position: relative;
+    height: 100%;
+    aspect-ratio: 9 / 19.5;
+    padding: 2.2%;
+    border-radius: 14% / 6.5%;
+    background: linear-gradient(145deg, #2a2d33 0%, #111317 45%, #1e2126 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+      0 30px 60px rgba(0, 0, 0, 0.55);
+  }
+  .phone img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 12% / 5.6%;
+  }
+  .island {
+    position: absolute;
+    top: 3.6%;
+    left: 50%;
+    width: 30%;
+    height: 3.2%;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: #000;
+  }
+
+  .placeholder {
+    display: grid;
+    place-items: center;
+  }
+  .placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 2.2%;
+    border-radius: 12% / 5.6%;
+    background: linear-gradient(160deg, var(--app-color, var(--surface-2)), #050608);
+  }
+  .letter {
+    position: relative;
+    font-size: 3rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.25);
+  }
+</style>

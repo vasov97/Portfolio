@@ -1,0 +1,13 @@
+{
+  "eyebrow": "Tech stack",
+  "title": "Proven tools,",
+  "titleHighlight": "production-ready apps",
+  "subtitle": "The stack I use to ship fast without cutting corners.",
+  "groups": {
+    "mobile": "Mobile",
+    "backend": "Backend & data",
+    "monetization": "Monetization",
+    "engagement": "Engagement & AI",
+    "devices": "Devices & tools"
+  }
+}

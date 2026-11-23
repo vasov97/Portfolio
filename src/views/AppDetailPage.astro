@@ -1,0 +1,52 @@
+---
+
+import AppHero from '../components/app-detail/AppHero.astro';
+import AppStats from '../components/app-detail/AppStats.astro';
+import AppFeatures from '../components/app-detail/AppFeatures.astro';
+import RelatedApps from '../components/app-detail/RelatedApps.astro';
+import AppCta from '../components/app-detail/AppCta.astro';
+import { loc, type App } from '../lib/apps';
+import { getLocale } from '../i18n/utils';
+import BaseLayout from '../layout/BaseLayout.astro';
+
+interface Props {
+  app: App;
+}
+
+const { app } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const d = app.data;
+const site = Astro.site ?? new URL('https://vasov.vercel.app');
+
+const title = `${d.name} — ${loc(d.tagline, locale)}`;
+const description = loc(d.summary, locale);
+
+// Image for social sharing + Google: mockup → screenshot → icon → site default
+const shareImage = d.cover ?? d.screenshot ?? d.icon;
+
+const os = d.platforms
+  .map((p) => ({ ios: 'iOS', android: 'Android', web: 'Web', desktop: 'Windows, macOS' })[p])
+  .join(', ');
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: d.name,
+  description,
+  applicationCategory: d.platforms.includes('web') ? 'WebApplication' : 'MobileApplication',
+  operatingSystem: os,
+  url: new URL(Astro.url.pathname, site).href,
+  ...(shareImage ? { image: new URL(shareImage, site).href } : {}),
+  author: { '@id': `${site.href}#person` },
+};
+---
+
+<BaseLayout title={title} description={description} image={shareImage}>
+  <AppHero app={app} locale={locale} />
+  <AppStats app={app} locale={locale} />
+  <AppFeatures app={app} locale={locale} />
+  <RelatedApps current={app} locale={locale} />
+  <AppCta locale={locale} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

@@ -1,0 +1,11 @@
+---
+import AppDetailPage from '../../../views/AppDetailPage.astro';
+import { getApps } from '../../../lib/apps';
+
+export async function getStaticPaths() {
+  const apps = await getApps();
+  return apps.map((app) => ({ params: { slug: app.id }, props: { app } }));
+}
+---
+
+<AppDetailPage app={Astro.props.app} />

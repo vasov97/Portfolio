@@ -1,0 +1,156 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import Icon from '../ui/Icon.astro';
+import FeaturedSlide from '../apps/FeaturedSlide.astro';
+import { getFeaturedApps } from '../../lib/apps';
+import { getLocale, useTranslations } from '../../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const apps = await getFeaturedApps();
+---
+
+<section id="apps" class="section">
+  <div class="container">
+    <SectionHeader
+      eyebrow={t('apps.eyebrow')}
+      title={t('apps.title')}
+      highlight={t('apps.titleHighlight')}
+      subtitle={t('apps.subtitle')}
+    />
+
+    <div class="slider" data-slider>
+      <div
+        class="track"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label={t('apps.eyebrow')}
+        tabindex="0"
+        data-track
+      >
+        {
+          apps.map((app, i) => (
+            <FeaturedSlide app={app} locale={locale} index={i} total={apps.length} />
+          ))
+        }
+      </div>
+
+      <div class="controls">
+        <div class="progress">
+          <span class="thumb" style={`width: ${100 / apps.length}%`} data-thumb></span>
+        </div>
+        <button class="nav-btn" type="button" aria-label={t('apps.prev')} data-prev>
+          <Icon name="arrow-left" />
+        </button>
+        <button class="nav-btn nav-btn--next" type="button" aria-label={t('apps.next')} data-next>
+          <Icon name="arrow-right" />
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .track {
+    position: relative;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    column-gap: var(--space-8);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+  .track:focus-visible {
+    outline-offset: 8px;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-7);
+  }
+  .progress {
+    flex: 1;
+    height: 4px;
+    border-radius: var(--radius-pill);
+    background: var(--surface-2);
+    overflow: hidden;
+    margin-right: var(--space-4);
+  }
+  .thumb {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--text);
+    transition: transform 0.2s linear;
+  }
+
+  .nav-btn {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--border-strong);
+    transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  }
+  .nav-btn:hover {
+    transform: scale(1.06);
+  }
+  .nav-btn--next {
+    background: var(--text);
+    border-color: var(--text);
+    color: #000;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-slider]').forEach((slider) => {
+    const track = slider.querySelector<HTMLElement>('[data-track]');
+    const thumb = slider.querySelector<HTMLElement>('[data-thumb]');
+    const slides = slider.querySelectorAll<HTMLElement>('[data-slide]');
+    if (!track || !thumb || slides.length === 0) return;
+
+    const total = slides.length;
+
+    const currentIndex = () => {
+      const step = slides.length > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : 1;
+      return Math.round(track.scrollLeft / step);
+    };
+
+    const goTo = (i: number) => {
+      const index = (i + total) % total;
+      track.scrollTo({ left: slides[index].offsetLeft - slides[0].offsetLeft });
+    };
+
+    const updateProgress = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      const ratio = max > 0 ? track.scrollLeft / max : 0;
+      thumb.style.transform = `translateX(${ratio * (total - 1) * 100}%)`;
+    };
+
+    slider.querySelector('[data-prev]')?.addEventListener('click', () => goTo(currentIndex() - 1));
+    slider.querySelector('[data-next]')?.addEventListener('click', () => goTo(currentIndex() + 1));
+
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goTo(currentIndex() + 1);
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goTo(currentIndex() - 1);
+      }
+    });
+
+    track.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  });
+</script>

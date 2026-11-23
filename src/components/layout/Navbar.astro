@@ -1,0 +1,222 @@
+---
+import Button from '../ui/Button.astro';
+import LangSwitcher from './LangSwitcher.astro';
+import { SITE } from '../../config/site';
+import { getLocale, useTranslations, localizePath } from '../../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const home = localizePath('', locale);
+
+const links = ['apps', 'services', 'process', 'testimonials', 'estimate', 'contact'].map((id) => ({
+  href: `${home}#${id}`,
+  label: t(`nav.${id}`),
+}));
+---
+
+<header class="nav-wrap" data-nav>
+  <div class="container">
+    <nav class="bar" aria-label="Main">
+      <a href={home} class="logo">
+        {t('common.siteName')}<span class="logo-mark" aria-hidden="true"></span>
+      </a>
+
+      <ul class="links" id="nav-menu">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href} data-nav-link>
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="mobile-cta">
+          <Button href={SITE.calendly} external size="md" dot>{t('common.cta.bookCall')}</Button>
+        </li>
+      </ul>
+
+      <div class="actions">
+        <LangSwitcher />
+        <div class="desktop-cta">
+          <Button href={SITE.calendly} external size="sm" dot>{t('common.cta.bookCall')}</Button>
+        </div>
+        <button
+          class="burger"
+          type="button"
+          aria-controls="nav-menu"
+          aria-expanded="false"
+          aria-label={t('nav.openMenu')}
+          data-label-open={t('nav.openMenu')}
+          data-label-close={t('nav.closeMenu')}
+          data-burger
+        >
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav-wrap {
+    position: fixed;
+    top: var(--space-3);
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
+  .bar {
+    position: relative;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    padding-inline: var(--space-5) var(--space-2);
+    background: rgba(8, 10, 13, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: background-color var(--dur) var(--ease);
+  }
+  .nav-wrap[data-scrolled] .bar {
+    background: rgba(8, 10, 13, 0.85);
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .logo-mark {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-2);
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    list-style: none;
+  }
+  .links a {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    transition: color var(--dur) var(--ease);
+  }
+  .links a:hover {
+    color: var(--text);
+  }
+  .mobile-cta {
+    display: none;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .burger {
+    display: none;
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .burger span {
+    width: 18px;
+    height: 1.5px;
+    background: var(--text);
+    transition: transform var(--dur) var(--ease);
+  }
+  .nav-wrap[data-open] .burger span:first-child {
+    transform: translateY(3.75px) rotate(45deg);
+  }
+  .nav-wrap[data-open] .burger span:last-child {
+    transform: translateY(-3.75px) rotate(-45deg);
+  }
+
+  @media (max-width: 960px) {
+    .burger {
+      display: flex;
+    }
+    .links {
+      position: absolute;
+      top: calc(100% + var(--space-2));
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: var(--space-4);
+      background: rgba(8, 10, 13, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition:
+        opacity var(--dur) var(--ease),
+        transform var(--dur) var(--ease),
+        visibility var(--dur);
+    }
+    .nav-wrap[data-open] .links {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+    .links a {
+      display: block;
+      padding: var(--space-3) var(--space-2);
+      font-size: var(--fs-lg);
+      color: var(--text);
+    }
+    .mobile-cta {
+      display: block;
+      margin-top: var(--space-3);
+    }
+    .desktop-cta {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-nav]');
+  const burger = header?.querySelector<HTMLButtonElement>('[data-burger]');
+
+  const setOpen = (open: boolean) => {
+    if (!header || !burger) return;
+    header.toggleAttribute('data-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute(
+      'aria-label',
+      (open ? burger.dataset.labelClose : burger.dataset.labelOpen) ?? '',
+    );
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+
+  burger?.addEventListener('click', () => setOpen(!header?.hasAttribute('data-open')));
+  header
+    ?.querySelectorAll('[data-nav-link]')
+    .forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => e.key === 'Escape' && setOpen(false));
+
+  const onScroll = () => header?.toggleAttribute('data-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>

@@ -1,0 +1,18 @@
+{
+  "siteName": "Stefan Vasov",
+  "meta": {
+    "title": "Stefan Vasov — Flutter developer mobilnih aplikacija",
+    "description": "Flutter developer koji pravi brze i moderne iOS i Android aplikacije — od ideje i MVP-a do App Store-a i Google Play-a. Top Rated Plus na Upwork-u."
+  },
+  "cta": {
+    "bookCall": "Zakaži poziv",
+    "getQuote": "Zatraži ponudu",
+    "viewProject": "Pogledaj projekat",
+    "allApps": "Sve aplikacije"
+  },
+  "lang": {
+    "label": "Jezik",
+    "en": "English",
+    "sr": "Srpski"
+  }
+}

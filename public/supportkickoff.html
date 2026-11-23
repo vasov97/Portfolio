@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>KickOff: World Cup Quiz - Support</title>
+    <meta
+      name="description"
+      content="Support page for KickOff: World Cup Quiz. Get help, FAQs, and contact support for the ultimate World Cup football trivia game."
+    />
+    <meta name="robots" content="index, follow" />
+
+    <style>
+      :root {
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #121212;
+        --bg-card: #1a1a1a;
+        --text-primary: #ffffff;
+        --text-secondary: #a0a0a0;
+        --accent: #00ff88;
+        --accent-hover: #00cc6a;
+        --border: #2a2a2a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 20px;
+        width: 100%;
+      }
+
+      header {
+        background-color: var(--bg-secondary);
+        border-bottom: 1px solid var(--border);
+        padding: 40px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(10px);
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .logo span {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .back-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s ease;
+      }
+
+      .back-link:hover {
+        color: var(--accent-hover);
+      }
+
+      main {
+        flex: 1;
+        padding: 80px 0;
+      }
+
+      .support-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .app-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--accent), #00ffdd);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 40px;
+        box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+      }
+
+      .support-header h1 {
+        font-size: 42px;
+        margin-bottom: 8px;
+      }
+
+      .support-header .tagline {
+        color: var(--accent);
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      .support-header .intro {
+        color: var(--text-secondary);
+        font-size: 16px;
+        margin-bottom: 0;
+      }
+
+      .section {
+        background-color: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 15px;
+        padding: 40px;
+        margin-bottom: 30px;
+        transition: all 0.3s ease;
+      }
+
+      .section:hover {
+        border-color: var(--accent);
+        box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
+      }
+
+      .section h2 {
+        font-size: 28px;
+        color: var(--text-primary);
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .section h2::before {
+        content: "";
+        width: 4px;
+        height: 28px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+
+      .faq-item {
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .faq-item:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      .faq-item h3 {
+        font-size: 18px;
+        color: var(--accent);
+        margin-bottom: 10px;
+      }
+
+      .faq-item p {
+        color: var(--text-secondary);
+        line-height: 1.8;
+      }
+
+      .contact-item {
+        background-color: var(--bg-secondary);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border-left: 3px solid var(--accent);
+      }
+
+      .contact-item p {
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+      }
+
+      .contact-item a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .contact-item a:hover {
+        color: var(--accent-hover);
+        text-decoration: underline;
+      }
+
+      .disclaimer {
+        background-color: rgba(0, 255, 136, 0.05);
+        border: 1px solid rgba(0, 255, 136, 0.2);
+        padding: 20px;
+        border-radius: 10px;
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.8;
+      }
+
+      footer {
+        background-color: var(--bg-secondary);
+        border-top: 1px solid var(--border);
+        padding: 40px 0;
+        text-align: center;
+        margin-top: 60px;
+      }
+
+      footer p {
+        color: var(--text-secondary);
+        font-size: 14px;
+      }
+
+      @media (max-width: 768px) {
+        .support-header h1 {
+          font-size: 32px;
+        }
+
+        .section {
+          padding: 25px;
+        }
+
+        .section h2 {
+          font-size: 24px;
+        }
+
+        main {
+          padding: 50px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <a href="/" class="logo">
+            <span>⚽ KickOff</span>
+          </a>
+          <a href="/" class="back-link">← Back to Portfolio</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="support-header">
+          <div class="app-icon">⚽</div>
+          <h1>KickOff: World Cup Quiz</h1>
+          <p class="tagline">The ultimate World Cup football trivia quiz</p>
+          <p class="intro">Need help with KickOff? We're here for you.</p>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="section">
+          <h2>Frequently Asked Questions</h2>
+
+          <div class="faq-item">
+            <h3>How do I play?</h3>
+            <p>
+              Pick a nickname and flag, then tap Kick Off to start answering
+              timed football trivia questions. Earn points and coins for correct
+              answers.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>What are coins for?</h3>
+            <p>
+              Coins are an in-app currency you earn by playing. Spend them on
+              power-ups like 50/50, Skip, Reveal, and Buy Time during a quiz.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>How does the daily quiz work?</h3>
+            <p>
+              Every day there are 5 fresh questions for a bonus reward. Come
+              back daily to keep your check-in streak alive.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>How do I get on the leaderboard?</h3>
+            <p>
+              Answer questions correctly to earn points. The top 30 players
+              worldwide appear on the global leaderboard.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Is an account required?</h3>
+            <p>
+              No. Just pick a nickname and flag - no email, password, or login
+              needed.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3>I found a bug or have a suggestion.</h3>
+            <p>
+              Email us using the contact information below and we'll get back to
+              you as soon as possible.
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="section">
+          <h2>Contact Us</h2>
+
+          <div class="contact-item">
+            <p>✉️ <strong>Email Support</strong></p>
+            <a href="mailto:vasovmail@gmail.com">vasovmail@gmail.com</a>
+            <p style="margin-top: 10px; font-size: 14px">
+              We typically respond within 1-2 business days.
+            </p>
+          </div>
+        </div>
+
+        <!-- Disclaimer Section -->
+        <div class="section">
+          <div class="disclaimer">
+            <strong>Disclaimer:</strong> KickOff is an independent, fan-made
+            trivia game and is not affiliated with, endorsed by, or associated
+            with FIFA or any official football organization.
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

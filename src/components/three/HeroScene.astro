@@ -1,0 +1,64 @@
+---
+import { getApps } from '../../lib/apps';
+
+// First 6 apps by `order` go on the phones
+const apps = (await getApps()).slice(0, 6);
+const screens = apps.map((a) => ({
+  name: a.data.name,
+  color: a.data.color,
+  src: a.data.screenshot,
+}));
+---
+
+<div class="scene" data-hero-scene data-screens={JSON.stringify(screens)} aria-hidden="true">
+  <div class="fallback"></div>
+  <canvas></canvas>
+</div>
+
+<style>
+  .scene {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 1;
+    margin-inline: auto;
+  }
+
+  canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s var(--ease);
+  }
+  .scene[data-ready='true'] canvas {
+    opacity: 1;
+  }
+
+  .fallback {
+    position: absolute;
+    inset: 12%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(43, 140, 255, 0.3), transparent 70%);
+    filter: blur(40px);
+  }
+</style>
+
+<script>
+  import type { ScreenData } from './screenTexture';
+
+  const host = document.querySelector<HTMLElement>('[data-hero-scene]');
+
+  if (host) {
+    const screens: ScreenData[] = JSON.parse(host.dataset.screens ?? '[]');
+    const load = () =>
+      import('./scene').then((m) => m.mountScene(host, screens)).catch(() => {});
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(load, { timeout: 1500 });
+    } else {
+      setTimeout(load, 300);
+    }
+  }
+</script>

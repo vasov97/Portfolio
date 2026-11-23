@@ -1,0 +1,27 @@
+name: Puzzle Slicer
+order: 7
+color: '#8a2b4a'
+icon: /images/apps/puzzle_slicer_logo.png
+platforms: [web]
+category:
+  en: Web Product
+  sr: Web proizvod
+# cover: ../../assets/apps/puzzle-slicer-cover.png
+tagline:
+  en: Turn any photo into a jigsaw puzzle in the browser.
+  sr: Pretvori bilo koju fotografiju u slagalicu u pretraživaču.
+summary:
+  en: Puzzle Slicer is my own web product — upload a photo, pick the piece count and play instantly, no install needed. Monetized with PayPal.
+  sr: Puzzle Slicer je moj sopstveni web proizvod — otpremi fotografiju, izaberi broj delova i igraj odmah, bez instalacije. Monetizovan preko PayPal-a.
+features:
+  en:
+    - Any photo becomes a puzzle
+    - Adjustable piece counts
+    - PayPal payments
+  sr:
+    - Bilo koja fotografija postaje slagalica
+    - Podesiv broj delova
+    - PayPal plaćanje
+tech: [JavaScript, PayPal]
+links:
+  website: https://puzzleslicer.vercel.app

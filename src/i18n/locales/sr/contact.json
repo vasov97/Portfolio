@@ -1,0 +1,24 @@
+{
+  "eyebrow": "Kontakt",
+  "title": "Imate ideju za aplikaciju?",
+  "titleHighlight": "Hajde da pričamo.",
+  "subtitle": "Opišite mi projekat i javiću vam se u roku od 24 sata.",
+  "form": {
+    "name": "Vaše ime",
+    "email": "Email",
+    "message": "O vašoj aplikaciji",
+    "messagePlaceholder": "Šta pravite, za koga je namenjeno i do kada vam treba?",
+    "submit": "Pošalji poruku",
+    "sending": "Šalje se…",
+    "success": "Hvala! Poruka je poslata — javiću vam se u roku od 24 sata.",
+    "error": "Došlo je do greške. Pokušajte ponovo ili mi pišite direktno na email.",
+    "subject": "Novi upit sa portfolija"
+  },
+  "call": {
+    "title": "Radije biste razgovarali?",
+    "text": "Zakažite besplatan poziv od 30 minuta. Proći ćemo kroz ideju, obim posla i sledeće korake — bez ikakvih obaveza.",
+    "button": "Zakaži besplatan poziv",
+    "duration": "30 min · video poziv",
+    "or": "Ili me kontaktirajte na"
+  }
+}

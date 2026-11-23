@@ -1,0 +1,31 @@
+name: Skillena
+order: 4
+color: '#3b2a8f'
+icon: /images/apps/skillena_logo.png
+cover: /images/apps/skillena_cover3.png
+imageFit: contain
+platforms: [android]
+category:
+  en: AI & Education
+  sr: AI i edukacija
+# cover: ../../assets/apps/skillena-cover.png
+tagline:
+  en: An AI coach for soft skills.
+  sr: AI trener za meke veštine.
+summary:
+  en: Skillena helps people improve communication and soft skills through AI chat with voice input, practice scenarios, goals with AI-generated subtasks and daily tips — in English and Serbian.
+  sr: Skillena pomaže ljudima da unaprede komunikaciju i meke veštine kroz AI čet sa glasovnim unosom, scenarije za vežbu, ciljeve sa AI podzadacima i dnevne savete — na engleskom i srpskom.
+features:
+  en:
+    - AI chat coach with voice input
+    - Practice scenarios and skill training
+    - Goals with AI-generated subtasks
+    - Progress tracking and push reminders
+  sr:
+    - AI čet trener sa glasovnim unosom
+    - Scenariji za vežbu i trening veština
+    - Ciljevi sa podzadacima koje generiše AI
+    - Praćenje napretka i push podsetnici
+tech: [Flutter, OpenAI, Firebase, Cloud Functions]
+links:
+  googlePlay: https://play.google.com/store/apps/details?id=com.skillena.softai

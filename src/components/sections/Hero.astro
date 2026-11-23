@@ -1,0 +1,171 @@
+---
+import Button from '../ui/Button.astro';
+import HeroScene from '../three/HeroScene.astro';
+import { SITE } from '../../config/site';
+import { getLocale, useTranslations, tRaw, localizePath } from '../../i18n/utils';
+
+type Stat = { value: string; label: string };
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const stats = tRaw<Stat[]>(locale, 'hero.stats');
+const home = localizePath('', locale);
+---
+
+<section class="hero">
+  <div class="container grid">
+    <div class="copy">
+      <p class="badge reveal"><span class="pulse"></span>{t('hero.badge')}</p>
+
+      <h1 class="reveal" style="--d: 1">
+        {t('hero.titleLine1')}<br />
+        <span class="text-gradient">{t('hero.titleLine2')}</span>
+      </h1>
+
+      <p class="subtitle reveal" style="--d: 2">{t('hero.subtitle')}</p>
+
+      <div class="ctas reveal" style="--d: 3">
+        <Button href={SITE.calendly} external size="lg" dot>{t('hero.ctaPrimary')}</Button>
+        <Button href={`${home}#apps`} variant="ghost" size="lg">{t('hero.ctaSecondary')}</Button>
+      </div>
+    </div>
+
+    <div class="visual reveal" style="--d: 2">
+      <HeroScene />
+    </div>
+  </div>
+
+  <div class="container">
+    <ul class="stats reveal" style="--d: 4">
+      {
+        stats.map((s) => (
+          <li>
+            <strong>{s.value}</strong>
+            <span>{s.label}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: calc(var(--nav-h) + var(--space-8));
+    padding-bottom: var(--space-7);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    align-items: center;
+    gap: var(--space-7);
+  }
+
+  .copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+  .pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3ddc84;
+    box-shadow: 0 0 0 0 rgba(61, 220, 132, 0.6);
+    animation: pulse 2s infinite;
+  }
+
+  h1 {
+    font-size: var(--fs-display);
+  }
+
+  .subtitle {
+    max-width: 540px;
+    font-size: var(--fs-lg);
+    color: var(--text-muted);
+  }
+
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border);
+    list-style: none;
+  }
+  .stats li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .stats strong {
+    font-size: var(--fs-h3);
+    font-weight: 500;
+    letter-spacing: var(--tracking-tight);
+  }
+  .stats span {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+
+  .reveal {
+    animation: fade-up 0.8s var(--ease) both;
+    animation-delay: calc(var(--d, 0) * 90ms);
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+  @keyframes pulse {
+    70% {
+      box-shadow: 0 0 0 8px rgba(61, 220, 132, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(61, 220, 132, 0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .visual {
+      max-width: 340px;
+      width: 100%;
+      margin-inline: auto;
+    }
+  }
+  @media (max-width: 600px) {
+    .stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

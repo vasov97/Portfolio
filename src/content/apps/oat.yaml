@@ -1,0 +1,44 @@
+name: OAT – Osteoarthritis Tracker
+order: 9
+color: '#0F766E'
+platforms: [android, ios]
+category:
+  en: Health & Fitness
+  sr: Zdravlje i fitnes
+tagline:
+  en: Understand your arthritis. Take back your days.
+  sr: Razumi svoj artritis. Vrati svoje dane.
+summary:
+  en: OAT helps people with osteoarthritis and joint pain track how they feel in 30 seconds a day, see what affects their flares — including the weather — and bring a clear PDF report to their doctor. AI insights point out patterns in their own diary.
+  sr: OAT pomaže ljudima sa osteoartritisom i bolom u zglobovima da za 30 sekundi dnevno beleže kako se osećaju, vide šta utiče na pogoršanja — uključujući vreme — i donesu lekaru jasan PDF izveštaj. AI uvidi ukazuju na obrasce u njihovom dnevniku.
+stats:
+  - value: '30 s'
+    label:
+      en: Daily check-in for pain, stiffness, sleep, activity and mood
+      sr: Dnevna prijava bola, ukočenosti, sna, aktivnosti i raspoloženja
+  - value: 'AI'
+    label:
+      en: Weekly insights and flare reflections from your own diary
+      sr: Nedeljni uvidi i analize pogoršanja iz tvog dnevnika
+  - value: 'PDF'
+    label:
+      en: Doctor report with a short clinician summary
+      sr: Izveštaj za lekara sa kratkim kliničkim rezimeom
+features:
+  en:
+    - 30-second daily check-ins with optional local weather
+    - Flare tracking with possible triggers and AI reflections
+    - Pain trends, a pain calendar and pain-and-weather analysis
+    - Monthly joint check with recognised measures (PSFS, SANE, PGIC)
+    - PDF doctor report and appointment reminders
+    - Gentle smart reminders and evidence-based articles
+  sr:
+    - Dnevne prijave za 30 sekundi sa opcionim lokalnim vremenom
+    - Praćenje pogoršanja sa mogućim okidačima i AI analizom
+    - Trendovi bola, kalendar bola i analiza bola i vremena
+    - Mesečna provera zglobova sa priznatim merama (PSFS, SANE, PGIC)
+    - PDF izveštaj za lekara i podsetnici za preglede
+    - Pametni, nenametljivi podsetnici i članci zasnovani na dokazima
+tech: [React Native, Expo, Supabase, OpenAI, RevenueCat, Sentry]
+links:
+  website: https://vasov.vercel.app/oat/

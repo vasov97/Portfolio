@@ -1,0 +1,39 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import ServiceCard from '../services/ServiceCard.astro';
+import { getLocale, useTranslations, tRaw } from '../../i18n/utils';
+
+type Service = { title: string; description: string; points: string[] };
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const items = tRaw<Service[]>(locale, 'services.items');
+---
+
+<section id="services" class="section">
+  <div class="container">
+    <SectionHeader
+      eyebrow={t('services.eyebrow')}
+      title={t('services.title')}
+      highlight={t('services.titleHighlight')}
+      subtitle={t('services.subtitle')}
+    />
+
+    <div class="grid">
+      {items.map((s, i) => <ServiceCard index={i} {...s} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+  @media (max-width: 760px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

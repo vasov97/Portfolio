@@ -1,0 +1,59 @@
+---
+import { loc, type App } from '../../lib/apps';
+import { useTranslations, type Locale } from '../../i18n/utils';
+
+interface Props {
+  app: App;
+  locale: Locale;
+}
+
+const { app, locale } = Astro.props;
+const t = useTranslations(locale);
+const stats = app.data.stats;
+---
+
+{
+  stats.length > 0 && (
+    <section class="section stats-section" aria-label={t('appDetail.stats')}>
+      <div class="container">
+        <dl class="stats">
+          {stats.map((s) => (
+            <div class="stat">
+              <dt>{loc(s.value, locale)}</dt>
+              <dd>{loc(s.label, locale)}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .stats-section {
+    padding-block: var(--space-6);
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-4);
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+  dt {
+    font-size: var(--fs-h2);
+    font-weight: 500;
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.1;
+  }
+  dd {
+    color: var(--text-muted);
+  }
+</style>

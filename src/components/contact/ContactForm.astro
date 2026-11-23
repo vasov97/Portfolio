@@ -1,0 +1,213 @@
+---
+import { useTranslations, type Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const accessKey = 'fb10f0c6-5d80-41c3-a17f-cd07fb6df772';
+---
+
+<form
+  class="form"
+  data-contact-form
+  data-sending={t('contact.form.sending')}
+  data-success={t('contact.form.success')}
+  data-error={t('contact.form.error')}
+  data-subject={t('contact.form.subject')}
+>
+  <input type="hidden" name="access_key" value={accessKey} />
+  <input type="hidden" name="from_name" value="vasov.vercel.app" />
+  <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off" />
+
+  <div class="row">
+    <label class="field">
+      <span>{t('contact.form.name')}</span>
+      <input type="text" name="name" required autocomplete="name" maxlength="100" />
+    </label>
+    <label class="field">
+      <span>{t('contact.form.email')}</span>
+      <input type="email" name="email" required autocomplete="email" maxlength="150" />
+    </label>
+  </div>
+
+  <label class="field">
+    <span>{t('contact.form.message')}</span>
+    <textarea
+      name="message"
+      rows="6"
+      required
+      maxlength="4000"
+      placeholder={t('contact.form.messagePlaceholder')}
+      data-message></textarea>
+  </label>
+
+  <button type="submit" class="submit" data-submit>
+    <span data-submit-label>{t('contact.form.submit')}</span>
+    <span class="dot" aria-hidden="true"></span>
+  </button>
+
+  <p class="status" role="status" aria-live="polite" data-status></p>
+</form>
+
+<style>
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-6);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .field span {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-elev);
+    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(43, 140, 255, 0.18);
+  }
+  ::placeholder {
+    color: var(--text-dim);
+  }
+  .honeypot {
+    display: none;
+  }
+
+  .submit {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: 0.95rem 1.6rem;
+    border-radius: var(--radius-sm);
+    background: var(--accent-gradient);
+    color: #04121f;
+    font-weight: 500;
+    transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+  }
+  .submit:hover {
+    transform: translateY(-1px);
+  }
+  .submit:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .status {
+    min-height: 1.5em;
+    font-size: var(--fs-sm);
+  }
+  .status.is-success {
+    color: #3ddc84;
+  }
+  .status.is-error {
+    color: #ff6b6b;
+  }
+
+  @media (max-width: 600px) {
+    .row {
+      grid-template-columns: 1fr;
+    }
+    .submit {
+      align-self: stretch;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const message = form?.querySelector<HTMLTextAreaElement>('[data-message]');
+  const submit = form?.querySelector<HTMLButtonElement>('[data-submit]');
+  const submitLabel = form?.querySelector<HTMLElement>('[data-submit-label]');
+  const status = form?.querySelector<HTMLElement>('[data-status]');
+
+  // Pre-fill from the estimator ("Send me these details")
+  const prefill = () => {
+    if (!message || message.value.trim()) return;
+    try {
+      const summary = sessionStorage.getItem('estimate-summary');
+      if (summary) message.value = `${summary}\n\n`;
+    } catch {
+      /* storage unavailable, ignore */
+    }
+  };
+  prefill();
+  document
+    .querySelectorAll('[data-send-details]')
+    .forEach((a) => a.addEventListener('click', () => setTimeout(prefill, 0)));
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!submit || !submitLabel || !status) return;
+
+    const original = submitLabel.textContent;
+    const data = Object.fromEntries(new FormData(form));
+    data.subject = `${form.dataset.subject} — ${data.name}`;
+
+    submit.disabled = true;
+    submitLabel.textContent = form.dataset.sending ?? '…';
+    status.textContent = '';
+    status.className = 'status';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error(json.message);
+
+      status.textContent = form.dataset.success ?? '';
+      status.classList.add('is-success');
+      form.reset();
+      try {
+        sessionStorage.removeItem('estimate-summary');
+      } catch {
+        /* ignore */
+      }
+    } catch {
+      status.textContent = form.dataset.error ?? '';
+      status.classList.add('is-error');
+    } finally {
+      submit.disabled = false;
+      submitLabel.textContent = original;
+    }
+  });
+</script>

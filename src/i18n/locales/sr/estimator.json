@@ -1,0 +1,48 @@
+{
+  "eyebrow": "Procena",
+  "title": "Koliko će koštati",
+  "titleHighlight": "vaša aplikacija?",
+  "subtitle": "Izaberite šta vam treba i odmah dobijte okvirnu cenu. Tačna cena nakon besplatnog poziva.",
+  "platform": {
+    "legend": "Platforma",
+    "ios": "iOS",
+    "android": "Android",
+    "both": "iOS + Android"
+  },
+  "size": {
+    "legend": "Veličina aplikacije",
+    "simple": "Jednostavna",
+    "simpleHint": "MVP · do ~6 ekrana",
+    "medium": "Srednja",
+    "mediumHint": "~10–15 ekrana",
+    "complex": "Kompleksna",
+    "complexHint": "20+ ekrana"
+  },
+  "features": {
+    "legend": "Funkcionalnosti",
+    "auth": "Korisnički nalozi i prijava",
+    "backend": "Backend i baza podataka",
+    "payments": "Plaćanja i pretplate",
+    "push": "Push notifikacije",
+    "chat": "Čet i real-time",
+    "maps": "Mape i lokacija",
+    "ai": "AI funkcije",
+    "admin": "Admin panel",
+    "analytics": "Analitika i izveštaji o greškama",
+    "i18n": "Više jezika"
+  },
+  "design": {
+    "legend": "Dizajn",
+    "have": "Imam dizajn",
+    "need": "Treba mi dizajn"
+  },
+  "result": {
+    "label": "Okvirna cena",
+    "timeline": "Okvirno trajanje",
+    "weeks": " nedelja",
+    "note": "Samo okvirno — uključuje razvoj, testiranje i objavu na store-ovima. Tačna ponuda nakon besplatnog poziva.",
+    "bookCall": "Zakaži besplatan poziv",
+    "sendDetails": "Pošalji mi ove detalje"
+  },
+  "summaryTitle": "Zahtev za procenu"
+}

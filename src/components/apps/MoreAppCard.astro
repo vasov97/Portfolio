@@ -1,0 +1,124 @@
+---
+import AppCover from './AppCover.astro';
+import AppIcon from './AppIcon.astro';
+import Icon from '../ui/Icon.astro';
+import { loc, type App } from '../../lib/apps';
+import { localizePath, useTranslations, type Locale } from '../../i18n/utils';
+
+interface Props {
+  app: App;
+  locale: Locale;
+}
+
+const { app, locale } = Astro.props;
+const t = useTranslations(locale);
+const d = app.data;
+const href = localizePath(`apps/${app.id}`, locale);
+const tags = [loc(d.category, locale), ...d.platforms.map((p) => t(`more.platforms.${p}`))];
+---
+
+<a href={href} class="card" style={`--app-color: ${d.color}`} data-card>
+  <div class="top">
+    <ul class="tags">
+      {tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+    <span class="arrow"><Icon name="arrow-up-right" size={18} /></span>
+  </div>
+
+  <div class="cover">
+    <AppCover app={app} alt={`${d.name} — ${t('apps.screenshotAlt')}`} />
+  </div>
+
+  <div class="bottom">
+    <AppIcon src={d.icon} size={44} />
+    <h3>{d.name}</h3>
+    <p>{loc(d.tagline, locale)}</p>
+  </div>
+</a>
+
+<style>
+  .card {
+    position: relative;
+    flex: 0 0 clamp(280px, 30vw, 380px);
+    height: clamp(480px, 46vw, 580px);
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background:
+      radial-gradient(
+        90% 60% at 50% 35%,
+        color-mix(in srgb, var(--app-color), white 12%) 0%,
+        transparent 70%
+      ),
+      linear-gradient(180deg, var(--app-color) 0%, color-mix(in srgb, var(--app-color), black 55%) 100%);
+    scroll-snap-align: start;
+  }
+
+  .top {
+    position: absolute;
+    inset: var(--space-5) var(--space-5) auto;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+  }
+  .tags li {
+    padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-xs);
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .arrow {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  }
+  .card:hover .arrow {
+    background: var(--text);
+    color: #000;
+    transform: rotate(45deg);
+  }
+
+  .cover {
+    position: absolute;
+    inset: 22% 0 26%;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.6s var(--ease);
+  }
+  .card:hover .cover {
+    transform: scale(1.04) translateY(-6px);
+  }
+
+  .bottom {
+    position: absolute;
+    inset: auto 0 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    padding: var(--space-8) var(--space-5) var(--space-5);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, transparent 100%);
+  }
+  .bottom h3 {
+    margin-top: var(--space-1);
+    font-size: var(--fs-h3);
+  }
+  .bottom p {
+    font-size: var(--fs-sm);
+    color: rgba(255, 255, 255, 0.75);
+  }
+</style>

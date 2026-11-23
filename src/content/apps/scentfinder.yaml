@@ -1,0 +1,53 @@
+name: ScentFinder
+order: 8
+color: '#6b2f3f'
+icon: /images/apps/scent_finder_logo.png
+screenshot: /images/apps/scent_home.png
+cover: /images/apps/scent_cover.png
+platforms: [android]
+category:
+  en: Lifestyle
+  sr: Životni stil
+# cover: ../../assets/apps/scentfinder-cover.png
+tagline:
+  en: A perfume guide and fragrance toolkit in one app.
+  sr: Vodič kroz parfeme i alati za mirise u jednoj aplikaciji.
+summary:
+  en: ScentFinder helps people discover their signature fragrance — scan a perfume collection from a photo for tailored recommendations, predict how long a scent will last, test layering combinations and explore scent families on an interactive wheel.
+  sr: ScentFinder pomaže ljudima da pronađu svoj prepoznatljiv miris — skeniraj kolekciju parfema sa fotografije za personalizovane preporuke, predvidi koliko će miris trajati, testiraj kombinacije slojevitog nanošenja i istraži porodice mirisa na interaktivnom točku.
+stats:
+  - value: '6'
+    label:
+      en: Fragrance tools — scanner, calculators, quiz, scent wheel and guides
+      sr: Alata za mirise — skener, kalkulatori, kviz, točak mirisa i vodiči
+  - value:
+      en: Photo scan
+      sr: Skeniranje
+    label:
+      en: Snap your collection to get matching recommendations and allergen insights
+      sr: Fotografiši kolekciju i dobij preporuke i informacije o alergenima
+  - value:
+      en: Hour by hour
+      sr: Sat po sat
+    label:
+      en: Longevity forecast based on skin, temperature, activity and season
+      sr: Prognoza trajanja na osnovu kože, temperature, aktivnosti i sezone
+features:
+  en:
+    - Perfume collection scanner with recommendations and allergen flags
+    - Longevity & projection calculator with an hour-by-hour timeline
+    - Layering compatibility calculator with a harmony score
+    - Interactive scent wheel with top, heart and base notes
+    - Personalized perfume quiz
+    - Expert tips on concentrations, authenticity and storage
+  sr:
+    - Skener kolekcije parfema sa preporukama i upozorenjima na alergene
+    - Kalkulator trajanja i projekcije sa vremenskom linijom sat po sat
+    - Kalkulator kompatibilnosti slojevitog nanošenja sa ocenom harmonije
+    - Interaktivni točak mirisa sa gornjim, srednjim i baznim notama
+    - Personalizovani kviz za izbor parfema
+    - Saveti stručnjaka o koncentracijama, autentičnosti i čuvanju
+tech: [Flutter]
+links:
+  googlePlay: https://play.google.com/store/apps/details?id=com.perfume_assist.app2
+  website: https://scentfinder.vercel.app

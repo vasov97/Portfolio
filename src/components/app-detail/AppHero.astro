@@ -1,0 +1,170 @@
+---
+import AppCover from '../apps/AppCover.astro';
+import AppIcon from '../apps/AppIcon.astro';
+import StoreLinks from '../apps/StoreLinks.astro';
+import AppGallery from './AppGallery.astro';
+import { loc, type App } from '../../lib/apps';
+import { localizePath, useTranslations, type Locale } from '../../i18n/utils';
+
+interface Props {
+  app: App;
+  locale: Locale;
+}
+
+const { app, locale } = Astro.props;
+const t = useTranslations(locale);
+const d = app.data;
+const backHref = `${localizePath('', locale)}#apps`;
+---
+
+<section class="hero" style={`--app-color: ${d.color}`}>
+  <div class="container">
+    <a href={backHref} class="back">← {t('appDetail.back')}</a>
+
+    <div class="grid">
+      <div class="copy">
+        <div class="identity">
+          <AppIcon src={d.icon} size={72} />
+          <span class="chip">{loc(d.category, locale)}</span>
+        </div>
+        <h1>{d.name}</h1>
+        <p class="tagline">{loc(d.tagline, locale)}</p>
+        <p class="summary">{loc(d.summary, locale)}</p>
+
+        <StoreLinks links={d.links} locale={locale} />
+
+        {
+          d.platforms.length > 0 && (
+            <p class="platforms">
+              <span>{t('appDetail.platforms')}:</span>
+              {d.platforms.map((p) => t(`more.platforms.${p}`)).join(' · ')}
+            </p>
+          )
+        }
+      </div>
+
+      {
+        d.gallery.length > 0 ? (
+          <AppGallery images={d.gallery} name={d.name} locale={locale} fit={d.imageFit} />
+        ) : (
+          <div
+            class:list={[
+              'visual',
+              { 'has-cover': d.cover, 'fit-contain': d.imageFit === 'contain' },
+            ]}
+          >
+            <AppCover app={app} alt={`${d.name} — ${t('apps.screenshotAlt')}`} eager />
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: calc(var(--nav-h) + var(--space-8));
+    padding-bottom: var(--space-8);
+  }
+  .back {
+    display: inline-block;
+    margin-bottom: var(--space-6);
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    transition: color var(--dur) var(--ease);
+  }
+  .back:hover {
+    color: var(--text);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-8);
+  }
+  .copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+  }
+  .identity {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .chip {
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+  }
+  h1 {
+    font-size: var(--fs-display);
+  }
+  .tagline {
+    font-size: var(--fs-h3);
+    line-height: var(--lh-snug);
+    letter-spacing: -0.01em;
+  }
+  .summary {
+    max-width: 560px;
+    font-size: var(--fs-lg);
+    color: var(--text-muted);
+  }
+  .platforms {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+  .platforms span {
+    margin-right: var(--space-2);
+    color: var(--text-dim);
+  }
+
+  /* ---------- Visual: always square ---------- */
+  .visual {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-6);
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background:
+      radial-gradient(
+        80% 60% at 50% 60%,
+        color-mix(in srgb, var(--app-color) 85%, transparent) 0%,
+        transparent 75%
+      ),
+      #07090c;
+  }
+
+  /* Promo artwork fills the square */
+  .visual.has-cover {
+    display: block;
+    padding: 0;
+  }
+  .visual.has-cover :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  /* imageFit: contain → whole image visible, no crop */
+  .visual.has-cover.fit-contain :global(img) {
+    object-fit: contain;
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

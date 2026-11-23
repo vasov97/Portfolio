@@ -1,0 +1,18 @@
+{
+  "siteName": "Stefan Vasov",
+  "meta": {
+    "title": "Stefan Vasov — Flutter Mobile App Developer",
+    "description": "Flutter developer building fast, beautiful iOS and Android apps — from idea and MVP to App Store and Google Play. Top Rated Plus on Upwork."
+  },
+  "cta": {
+    "bookCall": "Book a call",
+    "getQuote": "Get a quote",
+    "viewProject": "View project",
+    "allApps": "All apps"
+  },
+  "lang": {
+    "label": "Language",
+    "en": "English",
+    "sr": "Srpski"
+  }
+}

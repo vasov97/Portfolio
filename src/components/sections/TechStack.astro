@@ -1,0 +1,76 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import TechChip from '../stack/TechChip.astro';
+import { STACK } from '../../data/stack';
+import { getLocale, useTranslations } from '../../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<section id="stack" class="section">
+  <div class="container">
+    <SectionHeader
+      eyebrow={t('stack.eyebrow')}
+      title={t('stack.title')}
+      highlight={t('stack.titleHighlight')}
+      subtitle={t('stack.subtitle')}
+    />
+
+    <div class="groups">
+      {
+        STACK.map((group) => (
+          <div class="group">
+            <h3>{t(`stack.groups.${group.key}`)}</h3>
+            <ul>
+              {group.items.map((item) => (
+                <TechChip item={item} />
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .groups {
+    display: flex;
+    flex-direction: column;
+  }
+  .group {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    align-items: start;
+    gap: var(--space-5);
+    padding-block: var(--space-6);
+    border-top: 1px solid var(--border);
+  }
+  .group:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    padding-top: var(--space-3);
+    font-size: var(--fs-base);
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    list-style: none;
+  }
+
+  @media (max-width: 760px) {
+    .group {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+    h3 {
+      padding-top: 0;
+    }
+  }
+</style>

@@ -1,0 +1,126 @@
+---
+interface Option {
+  id: string;
+  label: string;
+  hint?: string;
+}
+
+interface Props {
+  legend: string;
+  name: string;
+  type: 'radio' | 'checkbox';
+  options: Option[];
+  checked: string[];
+  columns?: number;
+}
+
+const { legend, name, type, options, checked, columns = 3 } = Astro.props;
+---
+
+<fieldset class="group">
+  <legend>{legend}</legend>
+  <div class="options" style={`--cols: ${columns}`}>
+    {
+      options.map((o) => (
+        <label class="option">
+          <input type={type} name={name} value={o.id} checked={checked.includes(o.id)} />
+          <span class:list={['box', `box--${type}`]}>
+            <span class="label">{o.label}</span>
+            {o.hint && <span class="hint">{o.hint}</span>}
+          </span>
+        </label>
+      ))
+    }
+  </div>
+</fieldset>
+
+<style>
+  .group {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  legend {
+    margin-bottom: var(--space-3);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .options {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+  .option {
+    cursor: pointer;
+  }
+  input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .box {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  }
+  .box--checkbox {
+    padding-left: calc(var(--space-4) + 26px);
+  }
+  .box--checkbox::before {
+    content: '';
+    position: absolute;
+    left: var(--space-4);
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    transform: translateY(-50%);
+    border: 1.5px solid var(--border-strong);
+    border-radius: 4px;
+    transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+  .option:hover .box {
+    border-color: var(--border-strong);
+  }
+
+  input:checked + .box {
+    border-color: var(--accent);
+    background: rgba(43, 140, 255, 0.08);
+  }
+  input:checked + .box--checkbox::before {
+    border-color: var(--accent);
+    background: var(--accent)
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E")
+      center / 11px no-repeat;
+  }
+  input:focus-visible + .box {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 2px;
+  }
+
+  .label {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+  }
+  .hint {
+    font-size: var(--fs-xs);
+    color: var(--text-dim);
+  }
+
+  @media (max-width: 600px) {
+    .options {
+      grid-template-columns: repeat(min(var(--cols), 2), minmax(0, 1fr));
+    }
+  }
+</style>

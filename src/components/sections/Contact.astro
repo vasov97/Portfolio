@@ -1,0 +1,39 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import ContactForm from '../contact/ContactForm.astro';
+import BookCallCard from '../contact/BookCallCard.astro';
+import { getLocale, useTranslations } from '../../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<section id="contact" class="section">
+  <div class="container">
+    <SectionHeader
+      eyebrow={t('contact.eyebrow')}
+      title={t('contact.title')}
+      highlight={t('contact.titleHighlight')}
+      subtitle={t('contact.subtitle')}
+    />
+
+    <div class="grid">
+      <ContactForm locale={locale} />
+      <BookCallCard locale={locale} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: var(--space-4);
+    align-items: stretch;
+  }
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

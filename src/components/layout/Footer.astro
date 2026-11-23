@@ -1,0 +1,188 @@
+---
+import LangSwitcher from './LangSwitcher.astro';
+import { SITE } from '../../config/site';
+import { getApps } from '../../lib/apps';
+import { getLocale, useTranslations, localizePath } from '../../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const home = localizePath('', locale);
+const apps = await getApps();
+const year = new Date().getFullYear();
+
+const navLinks = ['apps', 'services', 'process', 'testimonials', 'estimate', 'contact'].map(
+  (id) => ({ href: `${home}#${id}`, label: t(`nav.${id}`) }),
+);
+
+const contactLinks = [
+  { href: `mailto:${SITE.email}`, label: SITE.email, external: false },
+  { href: SITE.calendly, label: t('footer.bookCall'), external: true },
+  { href: SITE.linkedin, label: 'LinkedIn', external: true },
+  { href: SITE.upwork, label: 'Upwork', external: true },
+];
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="top">
+      <div class="brand">
+        <a href={home} class="logo">
+          {t('common.siteName')}<span class="logo-mark" aria-hidden="true"></span>
+        </a>
+        <p>{t('footer.tagline')}</p>
+      </div>
+
+      <nav class="col" aria-label={t('footer.navigation')}>
+        <h2>{t('footer.navigation')}</h2>
+        <ul>
+          {navLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </nav>
+
+      <nav class="col" aria-label={t('footer.apps')}>
+        <h2>{t('footer.apps')}</h2>
+        <ul>
+          {
+            apps.map((app) => (
+              <li>
+                <a href={localizePath(`apps/${app.id}`, locale)}>{app.data.name}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="col">
+        <h2>{t('footer.contact')}</h2>
+        <ul>
+          {
+            contactLinks.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                  {l.label}
+                  {l.external && ' ↗'}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p>© {year} {t('common.siteName')}. {t('footer.rights')}</p>
+      <a href="/support" class="muted-link">{t('footer.support')}</a>
+      <div class="bottom-right">
+        <LangSwitcher />
+        <a href="#main" class="muted-link">{t('footer.backToTop')} ↑</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-top: var(--space-8);
+    padding-top: var(--space-9);
+    padding-bottom: var(--space-6);
+    border-top: 1px solid var(--border);
+    background: linear-gradient(180deg, transparent, rgba(11, 58, 82, 0.15));
+  }
+
+  .top {
+    display: grid;
+    grid-template-columns: 1.6fr repeat(3, 1fr);
+    gap: var(--space-7);
+    padding-bottom: var(--space-8);
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .logo-mark {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-2);
+  }
+  .brand p {
+    max-width: 320px;
+    margin-top: var(--space-4);
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+
+  .col h2 {
+    margin-bottom: var(--space-4);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .col ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    list-style: none;
+  }
+  .col a {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    transition: color var(--dur) var(--ease);
+    word-break: break-word;
+  }
+  .col a:hover {
+    color: var(--text);
+  }
+
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border);
+    font-size: var(--fs-sm);
+    color: var(--text-dim);
+  }
+  .bottom-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+  }
+  .muted-link {
+    color: var(--text-dim);
+    transition: color var(--dur) var(--ease);
+  }
+  .muted-link:hover {
+    color: var(--text);
+  }
+
+  @media (max-width: 900px) {
+    .top {
+      grid-template-columns: 1fr 1fr;
+    }
+    .brand {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 520px) {
+    .top {
+      grid-template-columns: 1fr;
+    }
+    .bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,44 @@
+name: Dragon Paws
+order: 2
+featured: true
+color: '#4a1f6b'
+icon: /images/apps/dragonpaws_logo.png
+cover: /images/apps/paws_cover.png
+platforms: [ios, android]
+category:
+  en: Kids & Games
+  sr: Deca i igre
+# cover: ../../assets/apps/dragon-paws-cover.png
+tagline:
+  en: A puzzle adventure with 27 dragon-chihuahuas.
+  sr: Puzzle avantura sa 27 zmaja-čivave.
+summary:
+  en: Dragon Paws is a kids' puzzle game where children collect dragon-chihuahua characters, unlock comics and earn rewards. Built with a parental gate, a coin economy and subscriptions.
+  sr: Dragon Paws je puzzle igra za decu u kojoj deca skupljaju likove zmajeva-čivava, otključavaju stripove i osvajaju nagrade. Ima roditeljsku zaštitu, ekonomiju novčića i pretplate.
+stats:
+  - value: '250+'
+    label:
+      en: Puzzles across regular levels and special packs
+      sr: Slagalica kroz obične nivoe i specijalne pakete
+  - value: '27'
+    label:
+      en: Collectible characters with their own comics
+      sr: Likova za sakupljanje, svaki sa svojim stripom
+  - value: iOS + Android
+    label:
+      en: Subscriptions, rewards wheel and daily check-ins
+      sr: Pretplate, točak nagrada i dnevne nagrade
+features:
+  en:
+    - Jigsaw puzzles with progressive difficulty
+    - Comics, sticker book and achievements
+    - Spin wheel, daily check-in and coin economy
+    - Parental gate and subscriptions
+  sr:
+    - Slagalice sa postepenim povećanjem težine
+    - Stripovi, album sa sličicama i dostignuća
+    - Točak sreće, dnevne nagrade i ekonomija novčića
+    - Roditeljska zaštita i pretplate
+tech: [Flutter, Firebase, RevenueCat, AdMob, Cloudflare R2]
+links:
+  website: https://www.dragonpaws.app

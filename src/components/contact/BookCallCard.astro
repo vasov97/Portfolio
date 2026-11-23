@@ -1,0 +1,106 @@
+---
+import Button from '../ui/Button.astro';
+import { SITE } from '../../config/site';
+import { useTranslations, type Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const channels = [
+  { label: 'Email', href: `mailto:${SITE.email}`, external: false },
+  { label: 'LinkedIn', href: SITE.linkedin, external: true },
+  { label: 'Upwork', href: SITE.upwork, external: true },
+];
+---
+
+<aside class="card">
+  <span class="duration">
+    <span class="pulse" aria-hidden="true"></span>
+    {t('contact.call.duration')}
+  </span>
+  <h3>{t('contact.call.title')}</h3>
+  <p class="text">{t('contact.call.text')}</p>
+  <Button href={SITE.calendly} external size="lg" dot>{t('contact.call.button')}</Button>
+
+  <div class="channels">
+    <span>{t('contact.call.or')}</span>
+    <ul>
+      {
+        channels.map((c) => (
+          <li>
+            <a href={c.href} {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+              {c.label} ↗
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</aside>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+    height: 100%;
+    padding: var(--space-7) var(--space-6);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(90% 70% at 100% 100%, var(--glow), transparent 70%),
+      radial-gradient(60% 50% at 0% 0%, rgba(43, 140, 255, 0.14), transparent 70%),
+      var(--surface);
+  }
+  .duration {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+  }
+  .pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #3ddc84;
+  }
+  h3 {
+    font-size: var(--fs-h2);
+  }
+  .text {
+    color: var(--text-muted);
+  }
+  .channels {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    width: 100%;
+    margin-top: auto;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border);
+    font-size: var(--fs-sm);
+    color: var(--text-dim);
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+    list-style: none;
+  }
+  a {
+    color: var(--text-muted);
+    transition: color var(--dur) var(--ease);
+  }
+  a:hover {
+    color: var(--text);
+  }
+</style>

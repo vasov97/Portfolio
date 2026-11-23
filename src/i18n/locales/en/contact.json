@@ -1,0 +1,24 @@
+{
+  "eyebrow": "Contact",
+  "title": "Have an app idea?",
+  "titleHighlight": "Let's talk.",
+  "subtitle": "Tell me about your project and I'll get back to you within 24 hours.",
+  "form": {
+    "name": "Your name",
+    "email": "Email",
+    "message": "About your app",
+    "messagePlaceholder": "What are you building, who is it for, and when do you need it?",
+    "submit": "Send message",
+    "sending": "Sending…",
+    "success": "Thanks! Your message was sent — I'll get back to you within 24 hours.",
+    "error": "Something went wrong. Please try again or email me directly.",
+    "subject": "New portfolio inquiry"
+  },
+  "call": {
+    "title": "Prefer to talk?",
+    "text": "Book a free 30-minute call. We'll go through your idea, scope and next steps — no strings attached.",
+    "button": "Book a free call",
+    "duration": "30 min · video call",
+    "or": "Or reach me on"
+  }
+}

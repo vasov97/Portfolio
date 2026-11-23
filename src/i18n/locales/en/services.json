@@ -1,0 +1,28 @@
+{
+  "eyebrow": "Services",
+  "title": "Everything you need to",
+  "titleHighlight": " launch an app",
+  "subtitle": "One developer, end to end — from the first screen to the App Store and beyond.",
+  "items": [
+    {
+      "title": "MVP Development",
+      "description": "Validate your idea fast with a focused first version on iOS and Android — built in weeks, not months.",
+      "points": ["Core features only", "Real users from day one", "Ready to scale later"]
+    },
+    {
+      "title": "Full Mobile App",
+      "description": "Production-ready apps with backend, payments, push notifications and analytics — built to grow.",
+      "points": ["Firebase or Supabase backend", "Subscriptions & in-app purchases", "Push, analytics & crash reports"]
+    },
+    {
+      "title": "FlutterFlow Apps",
+      "description": "Fast visual builds in FlutterFlow, with custom Flutter code where low-code hits its limits.",
+      "points": ["Rapid prototyping", "Custom widgets & actions", "Export to full Flutter code"]
+    },
+    {
+      "title": "Maintenance & Rescue",
+      "description": "Take over an existing Flutter app — fix bugs, update packages and get rejected builds approved.",
+      "points": ["Bug fixing & performance", "Store rejection fixes", "Ongoing feature work"]
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+---
+import Icon from '../ui/Icon.astro';
+import type { Locale } from '../../i18n/utils';
+
+interface Props {
+  images: string[];
+  name: string;
+  locale: Locale;
+  fit?: 'cover' | 'contain';
+}
+
+const { images, name, locale, fit = 'cover' } = Astro.props;
+const labels = locale === 'sr' ? ['Prethodna', 'Sledeća'] : ['Previous', 'Next'];
+const multiple = images.length > 1;
+---
+
+<div class:list={['gallery', `gallery--${fit}`]} data-gallery>
+  <div class="track" data-track>
+    {
+      images.map((src, i) => (
+        <div class="slide" data-slide>
+          <img
+            src={src}
+            alt={`${name} — ${i + 1}`}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+        </div>
+      ))
+    }
+  </div>
+
+  {
+    multiple && (
+      <>
+        <button class="nav nav--prev" type="button" aria-label={labels[0]} data-prev>
+          <Icon name="arrow-left" size={18} />
+        </button>
+        <button class="nav nav--next" type="button" aria-label={labels[1]} data-next>
+          <Icon name="arrow-right" size={18} />
+        </button>
+      </>
+    )
+  }
+</div>
+
+<style>
+  .gallery {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: #07090c;
+  }
+  .gallery--contain {
+    background:
+      radial-gradient(
+        80% 70% at 50% 50%,
+        color-mix(in srgb, var(--app-color, #15191e) 70%, transparent) 0%,
+        transparent 80%
+      ),
+      #07090c;
+  }
+
+  .track {
+    display: flex;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+  .slide {
+    flex: 0 0 100%;
+    height: 100%;
+    scroll-snap-align: start;
+  }
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .gallery--contain .slide img {
+    object-fit: contain;
+  }
+
+  .nav {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    transform: translateY(-50%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff;
+    transition: background-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .nav--prev {
+    left: var(--space-4);
+  }
+  .nav--next {
+    right: var(--space-4);
+  }
+  .nav:hover {
+    background: rgba(0, 0, 0, 0.75);
+    transform: translateY(-50%) scale(1.06);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
+    const track = gallery.querySelector<HTMLElement>('[data-track]');
+    const total = gallery.querySelectorAll('[data-slide]').length;
+    if (!track || total < 2) return;
+
+    const current = () => Math.round(track.scrollLeft / track.clientWidth);
+    const goTo = (i: number) => {
+      const index = (i + total) % total;
+      track.scrollTo({ left: index * track.clientWidth });
+    };
+
+    gallery.querySelector('[data-prev]')?.addEventListener('click', () => goTo(current() - 1));
+    gallery.querySelector('[data-next]')?.addEventListener('click', () => goTo(current() + 1));
+  });
+</script>

@@ -1,0 +1,97 @@
+---
+import {
+  getLocale,
+  useTranslations,
+  switchLocalePath,
+  LOCALES,
+  DEFAULT_LOCALE,
+  OG_LOCALE,
+  type Locale,
+} from '../../i18n/utils';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const HREFLANG: Record<Locale, string> = { en: 'en-US', sr: 'sr-Latn-RS' };
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const {
+  title,
+  description = t('common.meta.description'),
+  image = '/og-image.png',
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://vasov.vercel.app');
+const siteName = t('common.siteName');
+const fullTitle = title ? `${title} | ${siteName}` : t('common.meta.title');
+const canonical = new URL(Astro.url.pathname, site).href;
+const imageUrl = new URL(image, site).href;
+const pathname = Astro.url.pathname;
+
+const alternates = LOCALES.map((l) => ({
+  hreflang: HREFLANG[l],
+  href: new URL(switchLocalePath(pathname, l), site).href,
+}));
+const xDefault = new URL(switchLocalePath(pathname, DEFAULT_LOCALE), site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${site.href}#person`,
+      name: siteName,
+      jobTitle: 'Flutter Mobile App Developer',
+      url: site.href,
+      sameAs: [
+        'https://www.linkedin.com/in/vasov',
+        'https://www.upwork.com/freelancers/~0112b1400f99d74cf4',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.href}#website`,
+      url: site.href,
+      name: siteName,
+      inLanguage: Object.values(HREFLANG),
+      publisher: { '@id': `${site.href}#person` },
+    },
+  ],
+};
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+{alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+<link rel="alternate" hreflang="x-default" href={xDefault} />
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:locale" content={OG_LOCALE[locale]} />
+{LOCALES.filter((l) => l !== locale).map((l) => (
+  <meta property="og:locale:alternate" content={OG_LOCALE[l]} />
+))}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+
+<link rel="sitemap" href="/sitemap-index.xml" />
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
